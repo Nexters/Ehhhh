@@ -1,0 +1,30 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="cdimen15">3.7dp</dimen>
+    <dimen name="cdimen30">7.5dp</dimen>
+    <dimen name="cdimen44">11dp</dimen>
+    <dimen name="cdimen50">12.5dp</dimen>
+    <dimen name="cdimen60">15dp</dimen>
+    <dimen name="cdimen80">20dp</dimen>
+    <dimen name="cdimen100">25dp</dimen>
+    <dimen name="cdimen120">30dp</dimen>
+
+    <dimen name="actionbar_height">56dp</dimen>
+    <dimen name="actionbar_layoutTop">51dp</dimen>
+    <dimen name="actionbar_height_">-56dp</dimen>
+    <dimen name="actionbar_height2">112dp</dimen>
+    <dimen name="actionbar_write_size">70dp</dimen>
+
+    <dimen name="diolog_top_title_txtSize">20sp</dimen>
+    <dimen name="diolog_top_sub_txtSize">14sp</dimen>
+    <dimen name="dialog_out_layout_margin_left">15dp</dimen>
+    <dimen name="dialog_out_layout_margin_right">15dp</dimen>
+    <dimen name="dialog_in_layout_margin_left">25dp</dimen>
+    <dimen name="dialog_in_layout_margin_right">25dp</dimen>
+    <dimen name="dialog_layout_title_height">50dp</dimen>
+    <dimen name="dialog_layout_btn_height">50dp</dimen>
+    <dimen name="dialog_layout_center_margin">20dp</dimen>
+</resources>

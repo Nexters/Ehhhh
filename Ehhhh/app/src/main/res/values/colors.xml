@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="cback">#efefef</color>
+    <color name="cwhite">#ffffff</color>
+    <color name="ctrans">#00000000</color>
+    <color name="cblack">#000000</color>
+    <color name="cgray1">#F4F4F4</color>
+    <color name="cgray2">#ededed</color>
+    <color name="cgray3">#c9c9c9</color>
+    <color name="cgray4">#b2b2b2</color>
+    <color name="cgray5">#888888</color>
+    <color name="cgray6">#e0e0e0</color>
+    <color name="cgray7">#aaaaaa</color>
+    <color name="ngray">#dbdbdb</color>
+    <color name="cred">#D3394F</color>
+    <color name="cred_p">#932837</color>
+    <color name="nred">#ef6565</color>
+    <color name="nred_p">#cb5656</color>
+    <color name="cyellow">#ffde1f</color>
+    <color name="cblue">#006CB5</color>
+    <color name="cblue_p">#00539a</color>
+    <color name="cblue2">#7DBCE2</color>
+    <color name="cblue2_p">#0384c3</color>
+    <color name="cblue_list">#f8e1e5</color>
+    <color name="nblue">#039BE5</color>
+    <color name="list_press">#d9e9f4</color>
+    <color name="cred_list">#fae4e7</color>
+    <color name="cblack_btn_list">#4f4f4f</color>
+    <color name="cblack_btn_list_p">#373737</color>
+	<color name="cblue_uncheck">#7fafda</color>
+	<color name="cred_uncheck">#e99ca7</color>
+	<color name="cyellow2">#ee6f0b</color>
+	
+	<drawable name="translucent_background">#00000000</drawable>
+
+	<color name="title_normal">#FFFFFF</color>			<!-- 255, 255, 255 -->
+	<color name="optiontap_title">#E6E6E6</color>		<!-- 230, 230, 230 -->
+	<color name="sublist_2">#AFAFAF</color>				<!-- 175, 175, 175 -->
+	<color name="optiontap_select">#FFB38D</color>		<!-- 255, 179, 141 --> 
+
+	
+</resources>

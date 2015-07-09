@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set android:interpolator="@android:anim/linear_interpolator" android:shareInterpolator="false" android:fillBefore="false" android:fillAfter="false" android:zAdjustment="normal" android:fillEnabled="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate android:duration="17" android:startOffset="0" android:fromXDelta="100.0%p" android:toXDelta="92.49999%p" />
+    <translate android:duration="17" android:startOffset="17" android:fromXDelta="0.0%p" android:toXDelta="-11.4274025%p" />
+    <translate android:duration="17" android:startOffset="34" android:fromXDelta="0.0%p" android:toXDelta="-12.932098%p" />
+    <translate android:duration="17" android:startOffset="51" android:fromXDelta="0.0%p" android:toXDelta="-12.873304%p" />
+    <translate android:duration="17" android:startOffset="68" android:fromXDelta="0.0%p" android:toXDelta="-11.868%p" />
+    <translate android:duration="17" android:startOffset="85" android:fromXDelta="0.0%p" android:toXDelta="-10.374105%p" />
+    <translate android:duration="17" android:startOffset="102" android:fromXDelta="0.0%p" android:toXDelta="-8.699703%p" />
+    <translate android:duration="17" android:startOffset="119" android:fromXDelta="0.0%p" android:toXDelta="-7.0425987%p" />
+    <translate android:duration="17" android:startOffset="136" android:fromXDelta="0.0%p" android:toXDelta="-5.5202007%p" />
+    <translate android:duration="17" android:startOffset="153" android:fromXDelta="0.0%p" android:toXDelta="-4.1926026%p" />
+    <translate android:duration="17" android:startOffset="170" android:fromXDelta="0.0%p" android:toXDelta="-3.0817032%p" />
+    <translate android:duration="17" android:startOffset="187" android:fromXDelta="0.0%p" android:toXDelta="-2.1839976%p" />
+    <translate android:duration="17" android:startOffset="204" android:fromXDelta="0.0%p" android:toXDelta="-1.4816046%p" />
+    <translate android:duration="17" android:startOffset="221" android:fromXDelta="0.0%p" android:toXDelta="-0.9490013%p" />
+    <translate android:duration="17" android:startOffset="238" android:fromXDelta="0.0%p" android:toXDelta="-0.5583048%p" />
+    <translate android:duration="17" android:startOffset="255" android:fromXDelta="0.0%p" android:toXDelta="-0.2820015%p" />
+    <translate android:duration="17" android:startOffset="272" android:fromXDelta="0.0%p" android:toXDelta="-0.09499788%p" />
+    <translate android:duration="17" android:startOffset="289" android:fromXDelta="0.0%p" android:toXDelta="0.024211407%p" />
+    <translate android:duration="17" android:startOffset="306" android:fromXDelta="0.0%p" android:toXDelta="0.09390116%p" />
+    <translate android:duration="17" android:startOffset="323" android:fromXDelta="0.0%p" android:toXDelta="0.12869835%p" />
+    <translate android:duration="17" android:startOffset="340" android:fromXDelta="0.0%p" android:toXDelta="0.13999939%p" />
+    <translate android:duration="17" android:startOffset="357" android:fromXDelta="0.0%p" android:toXDelta="0.13619661%p" />
+    <translate android:duration="17" android:startOffset="374" android:fromXDelta="0.0%p" android:toXDelta="0.12370348%p" />
+    <translate android:duration="17" android:startOffset="391" android:fromXDelta="0.0%p" android:toXDelta="0.10700226%p" />
+    <translate android:duration="17" android:startOffset="408" android:fromXDelta="0.0%p" android:toXDelta="0.08889437%p" />
+    <translate android:duration="17" android:startOffset="425" android:fromXDelta="0.0%p" android:toXDelta="0.071299076%p" />
+    <translate android:duration="17" android:startOffset="442" android:fromXDelta="0.0%p" android:toXDelta="0.055503845%p" />
+    <translate android:duration="17" android:startOffset="459" android:fromXDelta="0.0%p" android:toXDelta="0.041794777%p" />
+</set>
