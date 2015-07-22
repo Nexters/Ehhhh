@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">ㅁㅈ</string>
 
+    <string name="title_section1">home</string>
+    <string name="title_section2">map</string>
+    <string name="title_section3">my page</string>
+
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">My Page</string>
+
 </resources>

@@ -22,7 +22,7 @@
         </activity>
 
         <activity
-            android:name=".SplashActivity"
+            android:name=".activity.SplashActivity"
             android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" />
     </application>
 

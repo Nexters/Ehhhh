@@ -13,7 +13,8 @@ public class Ehhhh extends Application {
     public void onCreate() {
         super.onCreate();
 
+        // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "jFEQcJnT5I2tVviV3faZOaeiye1SNXJtF51KtRgI", "QXn50z6hkZKwiCuKnOEnPMNXlVI4CukNL6GmfT8S");
+        Parse.initialize(this, "GlRu30kOz11iiOVolSoLFNTq1eteictDJZQlMT0l", "9Fp73GbZ7NSWe7mD9W3oW8gcwN913j03UXAIJxBk");
     }
 }
