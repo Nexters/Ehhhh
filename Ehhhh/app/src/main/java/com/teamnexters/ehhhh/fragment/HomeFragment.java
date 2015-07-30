@@ -21,7 +21,7 @@ public class HomeFragment extends Fragment {
     protected RecyclerView.LayoutManager mLayoutManager;
     protected HomeAdapter mAdapter;
 
-    public static HomeFragment newInstance(){
+    public static HomeFragment newInstance() {
 
         HomeFragment fragment = new HomeFragment();
         Bundle bundle = new Bundle();
@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.l_fragment_recyclerview, container, false);
         rootView.setTag(TAG);
 
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
 
@@ -82,14 +82,16 @@ public class HomeFragment extends Fragment {
 
         ItemData mDataset[] = {new ItemData("이달의 추천펍", R.drawable.beer),
                 new ItemData("이달의 보틀샵", R.drawable.beer),
-                new ItemData("현식의 추천펍", R.drawable.beer) };
+                new ItemData("현식의 추천펍", R.drawable.beer)};
 
         setRecyclerViewLayoutManager(mLayoutManagerType);
         mAdapter = new HomeAdapter(mDataset);
         mRecyclerView.setAdapter(mAdapter);
 
+
         return rootView;
     }
+
 
     public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
         int scrollPosition = 0;

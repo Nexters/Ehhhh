@@ -10,17 +10,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
+import com.teamnexters.ehhhh.activity.SearchActivity;
 import com.teamnexters.ehhhh.activity.SplashActivity;
 import com.teamnexters.ehhhh.fragment.HomeFragment;
 import com.teamnexters.ehhhh.fragment.LocationFragment;
 import com.teamnexters.ehhhh.fragment.MyPageFragment;
-
-import java.util.Locale;
 
 /**
  * Created by HyeonSi on 2015-07-09.
@@ -63,6 +59,14 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                 //actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
                 actionBar.addTab(actionBar.newTab().setIcon(mSectionsPagerAdapter.Icon[i]).setTabListener(this));
             }
+
+            findViewById(R.id.floatingbutton).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(mContext, SearchActivity.class));
+                }
+            });
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -106,9 +110,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             return 3;
         }
 
-        final int[] Icon = new int[] {
+        final int[] Icon = new int[]{
                 R.drawable.ic_person,
-                R.drawable.ic_person,
+                R.drawable.ic_location,
                 R.drawable.ic_person
         };
     }

@@ -1,50 +1,47 @@
 package com.teamnexters.ehhhh.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.teamnexters.ehhhh.R;
 
 /**
- * Created by HyeonSi on 2015-07-22.
+ * Created by csk on 2015-07-23.
  */
-public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
+public class PubAdapter extends RecyclerView.Adapter<PubAdapter.ViewHolder> {
 
     private static final String TAG = "LocationAdapter";
     static Context mContext;
 
-    private LocationFragment.ItemData[] itemsData;
+    private PubFragment.ItemData[] itemsData;
 
-    public LocationAdapter(LocationFragment.ItemData[] itemsData) {
+    public PubAdapter(PubFragment.ItemData[] itemsData) {
         this.itemsData = itemsData;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public ImageView imageView;
-        public TextView textView;
+        public TextView textPubName;
+        public TextView textAddress;
+        public TextView textPhone;
 
         public ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            imageView = (ImageView) itemView.findViewById(R.id.item_icon);
-            textView = (TextView) itemView.findViewById(R.id.item_title);
+            textPubName = (TextView) itemView.findViewById(R.id.item_pub_name);
+            textAddress = (TextView) itemView.findViewById(R.id.item_address);
+            textPhone = (TextView) itemView.findViewById(R.id.item_phone);
         }
 
         @Override
         public void onClick(View v) {
-            //Toast.makeText(mContext, textView.getText(), Toast.LENGTH_SHORT).show();
-
-            Intent intent = new Intent(mContext, PubFragment.class);
-            intent.putExtra("location", textView.getText().toString());
-            mContext.startActivity(intent);
+            Toast.makeText(mContext, textPubName.getText(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -52,7 +49,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_location, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pub, parent, false);
         mContext = parent.getContext();
 
         return new ViewHolder(v);
@@ -64,8 +61,9 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         Log.d(TAG, "Element " + position + " set.");
 
         try {
-            holder.imageView.setImageResource(itemsData[position].getImageUrl());
-            holder.textView.setText(itemsData[position].getTitle());
+            holder.textPubName.setText(itemsData[position].getPubName());
+            holder.textAddress.setText(itemsData[position].getAddress());
+            holder.textPhone.setText(itemsData[position].getPhone());
         } catch (Exception e) {
             e.printStackTrace();
         }

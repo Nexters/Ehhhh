@@ -27,4 +27,6 @@
     <dimen name="dialog_layout_title_height">50dp</dimen>
     <dimen name="dialog_layout_btn_height">50dp</dimen>
     <dimen name="dialog_layout_center_margin">20dp</dimen>
+
+
 </resources>
