@@ -19,8 +19,10 @@
     <color name="nred">#ef6565</color>
     <color name="nred_p">#cb5656</color>
 
-    <color name="cyellow">#ffde1f</color>
-    <color name="cyellow2">#ee6f0b</color>
+    <color name="floating">#ff5722</color>
+    <color name="floating_p">#d2471b</color>
+    <color name="cyellow">#f9b51e</color>
+    <color name="cyellow2">#e69f06</color>
 
     <color name="cblue">#006CB5</color>
     <color name="cblue_p">#00539a</color>

@@ -1,15 +1,42 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cwhite"
     android:gravity="center">
 
     <TextView
         android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="15dp"
         android:background="@color/nblue"
+        android:gravity="center_horizontal"
         android:padding="20dp"
         android:text="로그인"
         android:textColor="@color/cwhite" />
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="55dp"
+            android:src="@drawable/ic_beerpin" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="55dp"
+            android:gravity="center"
+            android:text="내가 좋아하거나 자주가는\n펍들을 추가해 보세요."
+            android:textColor="@color/cblack"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+</FrameLayout>

@@ -8,18 +8,16 @@
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/cwhite"/>
+        android:background="@color/cwhite" />
 
-
-    <com.getbase.floatingactionbutton.AddFloatingActionButton
+    <com.melnykov.fab.FloatingActionButton
         android:id="@+id/floatingbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        fab:fab_plusIconColor="@color/cwhite"
-        fab:fab_colorNormal="@color/cyellow2"
-        fab:fab_colorPressed="@color/cyellow"
         android:layout_gravity="bottom|right"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"/>
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_search"
+        fab:fab_colorNormal="@color/floating"
+        fab:fab_colorRipple="@color/floating_p"/>
 
 </FrameLayout>

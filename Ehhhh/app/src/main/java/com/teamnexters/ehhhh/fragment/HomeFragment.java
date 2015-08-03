@@ -81,8 +81,7 @@ public class HomeFragment extends Fragment {
         }
 
         ItemData mDataset[] = {new ItemData("이달의 추천펍", R.drawable.beer),
-                new ItemData("이달의 보틀샵", R.drawable.beer),
-                new ItemData("현식의 추천펍", R.drawable.beer)};
+                new ItemData("이달의 보틀샵", R.drawable.beer)};
 
         setRecyclerViewLayoutManager(mLayoutManagerType);
         mAdapter = new HomeAdapter(mDataset);

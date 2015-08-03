@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.teamnexters.ehhhh.R;
@@ -28,13 +29,13 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public ImageView imageView;
+        public LinearLayout imageView;
         public TextView textView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            imageView = (ImageView) itemView.findViewById(R.id.item_icon);
+            imageView = (LinearLayout) itemView.findViewById(R.id.layout_location);
             textView = (TextView) itemView.findViewById(R.id.item_title);
         }
 
@@ -64,7 +65,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         Log.d(TAG, "Element " + position + " set.");
 
         try {
-            holder.imageView.setImageResource(itemsData[position].getImageUrl());
+            holder.imageView.setBackground(mContext.getResources().getDrawable(itemsData[position].getImageUrl()));
             holder.textView.setText(itemsData[position].getTitle());
         } catch (Exception e) {
             e.printStackTrace();

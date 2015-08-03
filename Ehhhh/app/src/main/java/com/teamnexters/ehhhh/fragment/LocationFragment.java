@@ -80,11 +80,10 @@ public class LocationFragment extends Fragment {
             mLayoutManagerType = (LayoutManagerType) savedInstanceState.getSerializable(KEY_LAYOUT_MANAGER);
         }
 
-        ItemData mDataset[] = {new ItemData("강남구", R.drawable.ic_person),
-                new ItemData("마포구", R.drawable.ic_person),
-                new ItemData("서대문구", R.drawable.ic_person),
-                new ItemData("용산구", R.drawable.ic_person),
-                new ItemData("노원구", R.drawable.ic_person)};
+        ItemData mDataset[] = {new ItemData("강남구", R.drawable.back_gangnam),
+                new ItemData("용산구", R.drawable.back_youngsan),
+                new ItemData("마포구", R.drawable.back_mapo),
+                new ItemData("용산구", R.drawable.back_youngsan)};
 
         setRecyclerViewLayoutManager(mLayoutManagerType);
 

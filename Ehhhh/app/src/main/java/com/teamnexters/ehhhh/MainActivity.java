@@ -2,6 +2,8 @@ package com.teamnexters.ehhhh;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setDisplayShowHomeEnabled(false);
+            actionBar.setStackedBackgroundDrawable(getResources().getDrawable(R.drawable.theme_tap));
+
 
             mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -111,9 +115,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         }
 
         final int[] Icon = new int[]{
-                R.drawable.ic_person,
-                R.drawable.ic_location,
-                R.drawable.ic_person
+                R.drawable.btn_tap_home,
+                R.drawable.btn_tap_pin,
+                R.drawable.btn_tap_person
         };
     }
 }

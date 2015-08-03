@@ -2,6 +2,7 @@ package com.teamnexters.ehhhh.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.teamnexters.ehhhh.R;
@@ -9,7 +10,7 @@ import com.teamnexters.ehhhh.R;
 /**
  * Created by csk on 2015-07-23.
  */
-public class SearchActivity extends ActionBarActivity {
+public class SearchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
