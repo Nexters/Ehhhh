@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.teamnexters.ehhhh.R;
+import com.teamnexters.ehhhh.adapter.HomeAdapter;
 
 
 public class HomeFragment extends Fragment {
@@ -22,7 +23,6 @@ public class HomeFragment extends Fragment {
     protected HomeAdapter mAdapter;
 
     public static HomeFragment newInstance() {
-
         HomeFragment fragment = new HomeFragment();
         Bundle bundle = new Bundle();
         fragment.setArguments(bundle);
@@ -35,11 +35,13 @@ public class HomeFragment extends Fragment {
     }
 
     public class ItemData {
-        private String title;
+        private String title, location, subject;
         private int imageUrl;
 
-        public ItemData(String title, int imageUrl) {
+        public ItemData(String title, String location, String subject, int imageUrl) {
             this.title = title;
+            this.location = location;
+            this.subject = subject;
             this.imageUrl = imageUrl;
         }
 
@@ -50,6 +52,22 @@ public class HomeFragment extends Fragment {
 
         public void setTitle(String title) {
             this.title = title;
+        }
+
+        public String getLocation() {
+            return location;
+        }
+
+        public void setLocation(String location) {
+            this.location = location;
+        }
+
+        public String getSubject() {
+            return subject;
+        }
+
+        public void setSubject(String subject) {
+            this.subject = subject;
         }
 
         public int getImageUrl() {
@@ -68,7 +86,6 @@ public class HomeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View rootView = inflater.inflate(R.layout.l_fragment_recyclerview, container, false);
         rootView.setTag(TAG);
 
@@ -80,13 +97,12 @@ public class HomeFragment extends Fragment {
             mLayoutManagerType = (LayoutManagerType) savedInstanceState.getSerializable(KEY_LAYOUT_MANAGER);
         }
 
-        ItemData mDataset[] = {new ItemData("이달의 추천펍", R.drawable.beer),
-                new ItemData("이달의 보틀샵", R.drawable.beer)};
+        ItemData mDataset[] = {new ItemData("맥파이 브루잉", "강남구", "이번 달의 크래프트 비어샵", R.drawable.back_main_beer),
+                new ItemData("우리 슈퍼", "용산구", "이번 달의 보틀샵", R.drawable.back_main_bottle)};
 
         setRecyclerViewLayoutManager(mLayoutManagerType);
         mAdapter = new HomeAdapter(mDataset);
         mRecyclerView.setAdapter(mAdapter);
-
 
         return rootView;
     }

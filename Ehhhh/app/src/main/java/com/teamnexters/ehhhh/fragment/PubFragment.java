@@ -14,6 +14,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.teamnexters.ehhhh.R;
+import com.teamnexters.ehhhh.adapter.PubAdapter;
 
 /**
  * Created by csk on 2015-07-23.

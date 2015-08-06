@@ -1,23 +1,36 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/layout_main"
     android:background="@color/cwhite">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="@color/cyellow"
+        android:elevation="6dp" />
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/tab_layout"
         android:background="@color/cwhite" />
+
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/floatingbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/tab_layout"
         android:layout_margin="16dp"
         android:src="@drawable/ic_search"
         fab:fab_colorNormal="@color/floating"
-        fab:fab_colorRipple="@color/floating_p"/>
+        fab:fab_colorRipple="@color/floating_p" />
 
-</FrameLayout>
+</RelativeLayout>

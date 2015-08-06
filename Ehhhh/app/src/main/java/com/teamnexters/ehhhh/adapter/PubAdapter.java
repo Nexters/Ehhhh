@@ -1,4 +1,4 @@
-package com.teamnexters.ehhhh.fragment;
+package com.teamnexters.ehhhh.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.teamnexters.ehhhh.R;
+import com.teamnexters.ehhhh.fragment.PubFragment;
 
 /**
  * Created by csk on 2015-07-23.

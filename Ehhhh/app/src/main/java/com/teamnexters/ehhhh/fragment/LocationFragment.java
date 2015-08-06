@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.teamnexters.ehhhh.R;
+import com.teamnexters.ehhhh.adapter.LocationAdapter;
 
 public class LocationFragment extends Fragment {
 
