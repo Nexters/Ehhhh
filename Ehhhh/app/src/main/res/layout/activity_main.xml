@@ -1,17 +1,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/layout_main"
     android:background="@color/cwhite">
 
-    <android.support.design.widget.TabLayout
+    <android.support.design.widget.TabLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:background="@color/cyellow"
-        android:elevation="6dp" />
+        android:elevation="6dp"
+        app:tabIndicatorColor="@color/cwhite"
+        app:tabIndicatorHeight="2dp" />
 
 
     <android.support.v4.view.ViewPager
