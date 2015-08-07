@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.teamnexters.ehhhh.R;
 import com.teamnexters.ehhhh.fragment.LocationFragment;
-import com.teamnexters.ehhhh.fragment.PubFragment;
+import com.teamnexters.ehhhh.activity.PubActivity;
 
 /**
  * Created by HyeonSi on 2015-07-22.
@@ -44,7 +44,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         public void onClick(View v) {
             //Toast.makeText(mContext, textView.getText(), Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(mContext, PubFragment.class);
+            Intent intent = new Intent(mContext, PubActivity.class);
             intent.putExtra("location", textView.getText().toString());
             mContext.startActivity(intent);
         }

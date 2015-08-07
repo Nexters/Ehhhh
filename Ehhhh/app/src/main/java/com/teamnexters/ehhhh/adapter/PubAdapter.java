@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.teamnexters.ehhhh.R;
-import com.teamnexters.ehhhh.fragment.PubFragment;
+import com.teamnexters.ehhhh.activity.PubActivity;
 
 /**
  * Created by csk on 2015-07-23.
@@ -20,9 +20,9 @@ public class PubAdapter extends RecyclerView.Adapter<PubAdapter.ViewHolder> {
     private static final String TAG = "LocationAdapter";
     static Context mContext;
 
-    private PubFragment.ItemData[] itemsData;
+    private PubActivity.ItemData[] itemsData;
 
-    public PubAdapter(PubFragment.ItemData[] itemsData) {
+    public PubAdapter(PubActivity.ItemData[] itemsData) {
         this.itemsData = itemsData;
     }
 

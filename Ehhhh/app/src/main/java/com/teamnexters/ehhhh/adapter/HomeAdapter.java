@@ -2,7 +2,6 @@ package com.teamnexters.ehhhh.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 
 import com.teamnexters.ehhhh.R;
 import com.teamnexters.ehhhh.fragment.HomeFragment;
-import com.teamnexters.ehhhh.fragment.PubFragment;
+import com.teamnexters.ehhhh.activity.PubActivity;
 
 /**
  * Created by HyeonSi on 2015-07-22.
@@ -45,7 +44,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(mContext, PubFragment.class);
+            Intent intent = new Intent(mContext, PubActivity.class);
             intent.putExtra("location", title.getText().toString());
             mContext.startActivity(intent);
         }
