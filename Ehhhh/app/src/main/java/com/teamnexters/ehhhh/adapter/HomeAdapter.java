@@ -2,6 +2,7 @@ package com.teamnexters.ehhhh.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -63,7 +64,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         Log.d(TAG, "Element " + position + " set.");
 
         try {
-            holder.imageView.setImageResource(mDataSet[position].getImageUrl());
+            holder.imageView.setBackground(mContext.getResources().getDrawable(mDataSet[position].getImageUrl()));
             holder.title.setText(mDataSet[position].getTitle());
             holder.location.setText(mDataSet[position].getLocation());
             holder.subject.setText(mDataSet[position].getSubject());
