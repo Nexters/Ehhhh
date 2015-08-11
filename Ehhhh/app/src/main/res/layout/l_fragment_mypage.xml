@@ -1,42 +1,30 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cwhite"
-    android:gravity="center">
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/btn_login"
-        android:layout_width="match_parent"
+        android:id="@+id/name_txt"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_margin="15dp"
-        android:background="@color/nblue"
-        android:gravity="center_horizontal"
-        android:padding="20dp"
-        android:text="로그인"
-        android:textColor="@color/cwhite" />
+        android:textColor="@color/cblack"
+        android:textSize="19sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/mail_txt"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:textColor="@color/cblack"
+        android:textSize="16sp" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="55dp"
-            android:src="@drawable/ic_beerpin" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="55dp"
-            android:gravity="center"
-            android:text="내가 좋아하거나 자주가는\n펍들을 추가해 보세요."
-            android:textColor="@color/cblack"
-            android:textSize="24sp" />
-    </LinearLayout>
-
-</FrameLayout>
+    <TextView
+        android:id="@+id/btn_logout"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@color/cgray2"
+        android:gravity="center"
+        android:text="logout" />
+</LinearLayout>
