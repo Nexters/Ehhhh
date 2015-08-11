@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.teamnexters.ehhhh.R;
 import com.teamnexters.ehhhh.adapter.PubAdapter;
+import com.teamnexters.ehhhh.common.ItemData;
 
 /**
  * Created by csk on 2015-07-23.
@@ -30,12 +31,10 @@ public class PubActivity extends AppCompatActivity {
         String location = getIntent().getExtras().getString(ARG_PARAM);
         Toast.makeText(this, location, Toast.LENGTH_SHORT).show();
 
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
-
 
         // maps
         setUpMapIfNeeded();
@@ -92,7 +91,6 @@ public class PubActivity extends AppCompatActivity {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
 
-
     private static final String TAG = "PubFragement";
     private static final String KEY_LAYOUT_MANAGER = "layoutmanager";
 
@@ -105,42 +103,6 @@ public class PubActivity extends AppCompatActivity {
         LINEAR_LAYOUT_MANAGER
     }
 
-    public class ItemData {
-        private String pubName;
-        private String address;
-        private String phone;
-
-        public ItemData(String pubName, String address, String phone) {
-            this.pubName = pubName;
-            this.address = address;
-            this.phone = phone;
-        }
-
-        // getters & setters
-        public String getPubName() {
-            return pubName;
-        }
-
-        public void setPubName(String pubName) {
-            this.pubName = pubName;
-        }
-
-        public String getAddress() {
-            return address;
-        }
-
-        public void setAddress(String address) {
-            this.address = address;
-        }
-
-        public String getPhone() {
-            return phone;
-        }
-
-        public void setPhone(String phone) {
-            this.phone = phone;
-        }
-    }
 
     public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
         int scrollPosition = 0;

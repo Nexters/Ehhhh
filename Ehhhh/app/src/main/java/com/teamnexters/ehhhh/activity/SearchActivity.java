@@ -1,7 +1,6 @@
 package com.teamnexters.ehhhh.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
@@ -20,7 +19,6 @@ public class SearchActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

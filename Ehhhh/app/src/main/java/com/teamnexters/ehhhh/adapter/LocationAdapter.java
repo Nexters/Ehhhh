@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.teamnexters.ehhhh.R;
-import com.teamnexters.ehhhh.fragment.LocationFragment;
 import com.teamnexters.ehhhh.activity.PubActivity;
+import com.teamnexters.ehhhh.fragment.LocationFragment;
 
 /**
  * Created by HyeonSi on 2015-07-22.
@@ -42,8 +42,6 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
-            //Toast.makeText(mContext, textView.getText(), Toast.LENGTH_SHORT).show();
-
             Intent intent = new Intent(mContext, PubActivity.class);
             intent.putExtra("location", textView.getText().toString());
             mContext.startActivity(intent);
@@ -53,7 +51,6 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_location, parent, false);
         mContext = parent.getContext();
 

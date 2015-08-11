@@ -14,7 +14,6 @@ import com.teamnexters.ehhhh.fragment.MyPageFragment;
  */
 public class MainAdapter extends FragmentStatePagerAdapter {
 
-
     public MainAdapter(FragmentManager fm) {
         super(fm);
     }

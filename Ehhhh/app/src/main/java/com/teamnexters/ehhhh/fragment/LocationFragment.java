@@ -54,7 +54,6 @@ public class LocationFragment extends Fragment {
     }
 
     public static Fragment newInstance() {
-
         LocationFragment locationFragment = new LocationFragment();
         Bundle bundle = new Bundle();
         locationFragment.setArguments(bundle);
@@ -69,7 +68,6 @@ public class LocationFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View rootView = inflater.inflate(R.layout.l_fragment_recyclerview, container, false);
         rootView.setTag(TAG);
 

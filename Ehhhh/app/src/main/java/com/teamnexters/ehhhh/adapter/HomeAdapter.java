@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.teamnexters.ehhhh.R;
+import com.teamnexters.ehhhh.activity.PubDetailActivity;
 import com.teamnexters.ehhhh.fragment.HomeFragment;
-import com.teamnexters.ehhhh.activity.PubActivity;
 
 /**
  * Created by HyeonSi on 2015-07-22.
@@ -44,8 +44,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(mContext, PubActivity.class);
-            intent.putExtra("location", title.getText().toString());
+            // Edit by csk 2015-08-11 : 펍 상세화면 추가
+            Intent intent = new Intent(mContext, PubDetailActivity.class);
+            intent.putExtra("pub_id", title.getText().toString());
             mContext.startActivity(intent);
         }
     }

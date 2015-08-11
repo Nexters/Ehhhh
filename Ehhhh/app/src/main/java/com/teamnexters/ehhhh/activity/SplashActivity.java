@@ -35,6 +35,6 @@ public class SplashActivity extends Activity {
                 splash_anim.stop();
                 finish();
             }
-        }, 1000);
+        }, 2970);
     }
 }

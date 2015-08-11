@@ -38,12 +38,16 @@
         <activity
             android:name=".activity.SearchActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:label="@string/title_activity_search" />
-
+            android:label="@string/title_activity_search"
+            android:theme="@style/MyActionBar" />
         <activity
             android:name=".activity.PubActivity"
-            android:theme="@style/MyActionBar"
-            android:configChanges="keyboardHidden|orientation"/>
+            android:configChanges="keyboardHidden|orientation"
+            android:theme="@style/MyActionBar" />
+        <activity
+            android:name=".activity.PubDetailActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:theme="@style/MyActionBar" />
 
         <meta-data
             android:name="com.google.android.gms.version"

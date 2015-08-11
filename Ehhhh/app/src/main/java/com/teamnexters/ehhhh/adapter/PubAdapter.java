@@ -1,16 +1,17 @@
 package com.teamnexters.ehhhh.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.teamnexters.ehhhh.R;
-import com.teamnexters.ehhhh.activity.PubActivity;
+import com.teamnexters.ehhhh.activity.PubDetailActivity;
+import com.teamnexters.ehhhh.common.ItemData;
 
 /**
  * Created by csk on 2015-07-23.
@@ -20,9 +21,9 @@ public class PubAdapter extends RecyclerView.Adapter<PubAdapter.ViewHolder> {
     private static final String TAG = "LocationAdapter";
     static Context mContext;
 
-    private PubActivity.ItemData[] itemsData;
+    private ItemData[] itemsData;
 
-    public PubAdapter(PubActivity.ItemData[] itemsData) {
+    public PubAdapter(ItemData[] itemsData) {
         this.itemsData = itemsData;
     }
 
@@ -42,7 +43,11 @@ public class PubAdapter extends RecyclerView.Adapter<PubAdapter.ViewHolder> {
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(mContext, textPubName.getText(), Toast.LENGTH_SHORT).show();
+
+            // Edit by csk 2015-08-11 : 펍 상세화면 추가
+            Intent intent = new Intent(mContext, PubDetailActivity.class);
+            intent.putExtra("pub_id", textPubName.getText().toString());
+            mContext.startActivity(intent);
         }
     }
 
