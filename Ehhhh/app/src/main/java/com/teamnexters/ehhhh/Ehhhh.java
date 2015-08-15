@@ -17,6 +17,5 @@ public class Ehhhh extends Application {
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "GlRu30kOz11iiOVolSoLFNTq1eteictDJZQlMT0l", "9Fp73GbZ7NSWe7mD9W3oW8gcwN913j03UXAIJxBk");
-        ParseFacebookUtils.initialize(this);
     }
 }

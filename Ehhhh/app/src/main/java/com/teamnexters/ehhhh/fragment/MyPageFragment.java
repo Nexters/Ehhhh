@@ -4,22 +4,17 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.LogInCallback;
 import com.parse.ParseException;
-import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 import com.teamnexters.ehhhh.R;
 import com.teamnexters.ehhhh.Util.AppPreference;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by HyeonSi on 2015-07-22.
@@ -59,27 +54,7 @@ public class MyPageFragment extends Fragment {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                dialog = ProgressDialog.show(mContext, "", "Logging in....", true);
-
-                List<String> permissions = Arrays.asList("public_profile", "email");
-
-                ParseFacebookUtils.logInWithReadPermissionsInBackground(getActivity(), permissions, new LogInCallback() {
-                    @Override
-                    public void done(ParseUser parseUser, ParseException e) {
-                        dialog.dismiss();
-                        if (parseUser == null) {
-                            Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
-                        } else if (parseUser.isNew()) {
-                            Log.d("MyApp", "User signed up and logged in through Facebook!");
-                            getUserData();
-                        } else {
-                            Log.d("MyApp", "User logged in through Facebook!");
-                            getUserData();
-                        }
-                    }
-                });
-
+                doSignUp();
             }
         });
 
@@ -101,6 +76,25 @@ public class MyPageFragment extends Fragment {
 
         AppPreference.saveName(mContext, parseUser.getUsername());
         AppPreference.saveMail(mContext, parseUser.getEmail());
+    }
+
+
+    private void doSignUp() {
+        ParseUser user = new ParseUser();
+        user.setUsername("SIC");
+        user.setPassword("qqqq");
+        user.setEmail("user@email.com");
+
+        user.signUpInBackground(new SignUpCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    Toast.makeText(mContext, "성공!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(mContext, "실패", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
