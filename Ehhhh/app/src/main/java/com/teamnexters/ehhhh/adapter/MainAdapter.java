@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.teamnexters.ehhhh.R;
 import com.teamnexters.ehhhh.fragment.HomeFragment;
 import com.teamnexters.ehhhh.fragment.LocationFragment;
-import com.teamnexters.ehhhh.fragment.MyPageFragment;
+import com.teamnexters.ehhhh.fragment.PageFragment;
 
 /**
  * Created by HyeonSi on 2015-08-06.
@@ -26,7 +26,7 @@ public class MainAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return LocationFragment.newInstance();
             case 2:
-                return MyPageFragment.newInstance();
+                return PageFragment.newInstance();
             default:
                 return null;
         }

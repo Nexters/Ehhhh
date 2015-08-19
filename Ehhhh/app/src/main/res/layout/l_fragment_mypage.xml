@@ -2,29 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cwhite"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/name_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/cblack"
-        android:textSize="19sp" />
+        android:layout_gravity="center"
+        android:text="이제 마이페이지 여기에 작성하면되요"
+        android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/mail_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/cblack"
-        android:textSize="16sp" />
-
-
-    <TextView
-        android:id="@+id/btn_logout"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:background="@color/cgray2"
-        android:gravity="center"
-        android:text="logout" />
 </LinearLayout>
