@@ -4,27 +4,14 @@
     android:background="@color/cwhite"
     android:gravity="center">
 
-    <TextView
-        android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_margin="15dp"
-        android:background="@color/nblue"
-        android:gravity="center_horizontal"
-        android:padding="20dp"
-        android:text="로그인"
-        android:textColor="@color/cwhite" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="130dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="55dp"
             android:src="@drawable/ic_beerpin" />
@@ -33,34 +20,65 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="내가 좋아하거나 자주가는\n펍들을 추가해 보세요."
-            android:textColor="@color/cblack"
+            android:textColor="@color/cgray7"
             android:textSize="24sp" />
 
 
-        <TextView
-            android:id="@+id/name_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <EditText
+            android:id="@+id/login_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/cgray2"
+            android:hint="사용자이름"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:nextFocusDown="@+id/login_pass"
+            android:paddingLeft="10dp"
             android:textColor="@color/cblack"
-            android:textSize="19sp" />
-
-        <TextView
-            android:id="@+id/mail_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/cblack"
+            android:textColorHint="@color/cgray8"
             android:textSize="16sp" />
 
+        <EditText
+            android:id="@+id/login_pass"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/cgray2"
+            android:inputType="textPassword"
+            android:hint="비밀번호"
+            android:paddingLeft="10dp"
+            android:textColorHint="@color/cgray8"
+            android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/btn_logout"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:background="@color/cgray2"
-            android:gravity="center"
-            android:text="logout" />
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/cyellow"
+            android:gravity="center_horizontal"
+            android:padding="20dp"
+            android:text="로그인"
+            android:textColor="@color/cwhite" />
+
+        <TextView
+            android:id="@+id/btn_signup"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="새 계정 만들기"
+            android:textColor="@color/cyellow"
+            android:textSize="14sp" />
     </LinearLayout>
 </FrameLayout>

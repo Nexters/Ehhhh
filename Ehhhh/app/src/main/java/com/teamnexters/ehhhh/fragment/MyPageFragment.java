@@ -7,9 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -24,7 +26,7 @@ public class MyPageFragment extends Fragment {
     private static final String TAG = "MyPageFragement";
     Context mContext;
     ProgressDialog dialog;
-    TextView name, mail;
+    EditText edit_name, edit_password;
 
     public static MyPageFragment newInstance() {
         MyPageFragment fragment = new MyPageFragment();
@@ -47,29 +49,28 @@ public class MyPageFragment extends Fragment {
         rootView.setTag(TAG);
 
         TextView btn_login = (TextView) rootView.findViewById(R.id.btn_login);
-        TextView btn_logout = (TextView) rootView.findViewById(R.id.btn_logout);
-        name = (TextView) rootView.findViewById(R.id.name_txt);
-        mail = (TextView) rootView.findViewById(R.id.mail_txt);
+        edit_name = (EditText) rootView.findViewById(R.id.login_name);
+        edit_password = (EditText) rootView.findViewById(R.id.login_pass);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                doSignUp();
-            }
-        });
+                if (edit_name.getText().toString().equals("")) {
+                    Toast.makeText(mContext, "사용자 이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                } else if (edit_password.getText().toString().equals("")) {
+                    Toast.makeText(mContext, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                }
 
-
-        btn_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ParseUser.logOut();
-                Toast.makeText(mContext, "로그아웃되었습니다.", Toast.LENGTH_SHORT).show();
+                if (!edit_name.getText().toString().equals("") && !edit_password.getText().toString().equals("")) {
+                    doLogin();
+                }
             }
         });
 
         return rootView;
     }
 
+    //아직안씀
     public void getUserData() {
         ParseUser parseUser;
         parseUser = ParseUser.getCurrentUser();
@@ -78,7 +79,7 @@ public class MyPageFragment extends Fragment {
         AppPreference.saveMail(mContext, parseUser.getEmail());
     }
 
-
+    //아직안씀
     private void doSignUp() {
         ParseUser user = new ParseUser();
         user.setUsername("SIC");
@@ -97,11 +98,18 @@ public class MyPageFragment extends Fragment {
         });
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    private void doLogin() {
 
-        name.setText(AppPreference.loadName(mContext));
-        mail.setText(AppPreference.loadMail(mContext));
+        ParseUser.logInInBackground(edit_name.getText().toString(), edit_password.getText().toString(), new LogInCallback() {
+            @Override
+            public void done(ParseUser parseUser, ParseException e) {
+                if (parseUser != null) {
+
+                } else {
+                    Toast.makeText(mContext, "로그인 실패", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
