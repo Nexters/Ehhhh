@@ -1,4 +1,4 @@
-package com.teamnexters.ehhhh.Util;
+package com.teamnexters.ehhhh.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

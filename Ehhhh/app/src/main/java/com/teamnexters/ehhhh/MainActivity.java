@@ -8,7 +8,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.parse.ParseFacebookUtils;
 import com.teamnexters.ehhhh.activity.SearchActivity;
 import com.teamnexters.ehhhh.activity.SplashActivity;
 import com.teamnexters.ehhhh.adapter.MainAdapter;

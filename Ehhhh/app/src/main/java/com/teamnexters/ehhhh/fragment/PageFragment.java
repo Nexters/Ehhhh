@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import com.parse.ParseUser;
 import com.teamnexters.ehhhh.R;
-import com.teamnexters.ehhhh.Util.AppPreference;
 
 /**
  * Created by HyeonSi on 2015-07-22.

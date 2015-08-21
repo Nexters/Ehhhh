@@ -7,11 +7,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.teamnexters.ehhhh.R;
 import com.teamnexters.ehhhh.activity.PubDetailActivity;
+import com.teamnexters.ehhhh.activity.PubSubMapActivity;
 import com.teamnexters.ehhhh.common.ItemData;
+
+import java.util.ArrayList;
 
 /**
  * Created by csk on 2015-07-23.
@@ -27,31 +31,6 @@ public class PubAdapter extends RecyclerView.Adapter<PubAdapter.ViewHolder> {
         this.itemsData = itemsData;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        public TextView textPubName;
-        public TextView textAddress;
-        public TextView textPhone;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            itemView.setOnClickListener(this);
-            textPubName = (TextView) itemView.findViewById(R.id.item_pub_name);
-            textAddress = (TextView) itemView.findViewById(R.id.item_address);
-            textPhone = (TextView) itemView.findViewById(R.id.item_phone);
-        }
-
-        @Override
-        public void onClick(View v) {
-
-            // Edit by csk 2015-08-11 : 펍 상세화면 추가
-            Intent intent = new Intent(mContext, PubDetailActivity.class);
-            intent.putExtra("pub_id", textPubName.getText().toString());
-            mContext.startActivity(intent);
-        }
-    }
-
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -60,7 +39,6 @@ public class PubAdapter extends RecyclerView.Adapter<PubAdapter.ViewHolder> {
 
         return new ViewHolder(v);
     }
-
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
@@ -78,5 +56,51 @@ public class PubAdapter extends RecyclerView.Adapter<PubAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return itemsData.length;
+    }
+
+    public String getAdapterAddress(int pos) {
+        return itemsData[pos].getAddress();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        public TextView textPubName;
+        public TextView textAddress;
+        public TextView textPhone;
+        public ImageView mMapBtn;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            itemView.setOnClickListener(this);
+            init();
+        }
+
+        private void init() {
+            textPubName = (TextView) itemView.findViewById(R.id.item_pub_name);
+            textAddress = (TextView) itemView.findViewById(R.id.item_address);
+            textPhone = (TextView) itemView.findViewById(R.id.item_phone);
+            mMapBtn = (ImageView) itemView.findViewById(R.id.map_btn);
+
+            //hy.jung   sub map click
+            mMapBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent mapIntent = new Intent(mContext, PubSubMapActivity.class);
+                    mapIntent.putExtra("pub_address", textAddress.getText().toString());
+                    mapIntent.putExtra("pub_name", textPubName.getText().toString());
+                    mContext.startActivity(mapIntent);
+                }
+            });
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            // Edit by csk 2015-08-11 : 펍 상세화면 추가
+            Intent intent = new Intent(mContext, PubDetailActivity.class);
+            intent.putExtra("pub_id", textPubName.getText().toString());
+            mContext.startActivity(intent);
+        }
     }
 }

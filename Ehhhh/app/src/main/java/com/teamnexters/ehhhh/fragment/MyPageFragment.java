@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.parse.ParseUser;
 import com.teamnexters.ehhhh.R;
-import com.teamnexters.ehhhh.Util.AppPreference;
+import com.teamnexters.ehhhh.util.AppPreference;
 
 /**
  * Created by 현식 on 2015-08-20.
