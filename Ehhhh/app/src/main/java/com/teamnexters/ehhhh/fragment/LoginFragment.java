@@ -3,6 +3,7 @@ package com.teamnexters.ehhhh.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,8 +60,14 @@ public class LoginFragment extends Fragment {
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PageFragment pageFragment = new PageFragment();
-                pageFragment.changeSignup();
+//                PageFragment pageFragment = new PageFragment();
+//                pageFragment.changeSignup();
+//
+                // edit by 슬기 2015-08-20
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                SignupFragment fragment = new SignupFragment();
+                transaction.replace(R.id.content_fragment, fragment);
+                transaction.commit();
             }
         });
 
@@ -73,7 +80,13 @@ public class LoginFragment extends Fragment {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
                 if (parseUser != null) {
+                    //슬기
+                    Toast.makeText(mContext, "Welcome!!", Toast.LENGTH_SHORT).show();
 
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    MyPageFragment fragment = new MyPageFragment();
+                    transaction.replace(R.id.content_fragment, fragment);
+                    transaction.commit();
                 } else {
                     Toast.makeText(mContext, "로그인 실패", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();

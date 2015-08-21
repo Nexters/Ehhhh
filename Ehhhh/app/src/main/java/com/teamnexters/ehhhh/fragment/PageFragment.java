@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.parse.ParseUser;
 import com.teamnexters.ehhhh.R;
+import com.teamnexters.ehhhh.util.AppPreference;
 
 /**
  * Created by HyeonSi on 2015-07-22.
@@ -57,11 +58,11 @@ public class PageFragment extends Fragment {
         return rootView;
     }
 
-    public void changeSignup() {
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        SignupFragment fragment = new SignupFragment();
-        transaction.replace(R.id.content_fragment, fragment);
-
-        transaction.commit();
-    }
+//    public void changeSignup() {
+//        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//        SignupFragment fragment = new SignupFragment();
+//        transaction.replace(R.id.content_fragment, fragment);
+//
+//        transaction.commit();
+//    }
 }

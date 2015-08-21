@@ -4,6 +4,8 @@ package com.teamnexters.ehhhh.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +34,8 @@ public class SignupFragment extends Fragment {
         mContext = getActivity();
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.l_fragment_signup, container, false);
@@ -41,6 +45,26 @@ public class SignupFragment extends Fragment {
         mail = (EditText) rootView.findViewById(R.id.signup_mail);
         pass = (EditText) rootView.findViewById(R.id.signup_pass);
         pass_again = (EditText) rootView.findViewById(R.id.signup_pass_again);
+
+
+        //슬기
+        // 뒤로가기 버튼
+        rootView.setFocusableInTouchMode(true);
+        rootView.requestFocus();
+        rootView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if( keyCode == KeyEvent.KEYCODE_BACK ) {
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    LoginFragment fragment = new LoginFragment();
+                    transaction.replace(R.id.content_fragment, fragment);
+                    transaction.commit();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
 
         TextView btn_signup = (TextView) rootView.findViewById(R.id.btn_signup);
 
@@ -72,9 +96,14 @@ public class SignupFragment extends Fragment {
             @Override
             public void done(ParseException e) {
                 if (e == null) {
-                    Toast.makeText(mContext, "성공!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "가입되었습니다.", Toast.LENGTH_SHORT).show();
+                    // edit by 슬기 2015-08-20 : 로그인 화면으로 이동
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    LoginFragment fragment = new LoginFragment();
+                    transaction.replace(R.id.content_fragment, fragment);
+                    transaction.commit();
                 } else {
-                    Toast.makeText(mContext, "실패", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "가입에 실패하였습니다. 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
