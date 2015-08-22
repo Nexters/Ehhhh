@@ -12,4 +12,5 @@
 
 
     <string name="facebook_app_id">1041415189210540</string>
+    <string name="title_activity_pub_report">PubReport</string>
 </resources>

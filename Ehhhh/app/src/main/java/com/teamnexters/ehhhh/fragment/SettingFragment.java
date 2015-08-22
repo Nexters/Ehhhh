@@ -1,6 +1,7 @@
 package com.teamnexters.ehhhh.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +17,10 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.teamnexters.ehhhh.R;
+import com.teamnexters.ehhhh.activity.PubReport;
+import com.teamnexters.ehhhh.activity.VersionActivity;
+
+import junit.runner.Version;
 
 /**
  * Created by 슬기 on 2015-08-21.
@@ -37,6 +42,12 @@ public class SettingFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.l_fragment_setting, container, false);
         rootView.setTag(TAG);
 
+        TextView btn_logout = (TextView) rootView.findViewById(R.id.btn_logout);
+        TextView setting_version = (TextView) rootView.findViewById(R.id.setting_version);
+        TextView setting_about = (TextView) rootView.findViewById(R.id.setting_about);
+        TextView setting_report = (TextView) rootView.findViewById(R.id.setting_report);
+
+
         // 뒤로가기 버튼
         rootView.setFocusableInTouchMode(true);
         rootView.requestFocus();
@@ -55,7 +66,33 @@ public class SettingFragment extends Fragment {
             }
         });
 
-        TextView btn_logout = (TextView) rootView.findViewById(R.id.btn_logout);
+
+        //제보하기버튼
+        setting_report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mContext, PubReport.class));
+            }
+        });
+
+        //버전정보 버튼
+        setting_version.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mContext, VersionActivity.class));
+            }
+        });
+
+        //About us 버튼
+        setting_about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
+        //로그아웃 버튼
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,5 +108,4 @@ public class SettingFragment extends Fragment {
 
         return rootView;
     }
-
 }

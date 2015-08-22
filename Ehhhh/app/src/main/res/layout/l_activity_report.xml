@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cwhite"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/cgray4"
+        android:text="여기에 제보하기 페이지에 대한 설명을 적어주면 좋을듯"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/edit_report"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_weight="1"
+        android:background="@color/cgray3"
+        android:gravity="top"
+        android:hint="펍에대한정보를 입력해야하는데\n 뭔가 폼을 나눠야할듯"
+        android:inputType="text"
+        android:padding="10dp" />
+
+    <TextView
+        android:id="@+id/btn_report"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/cyellow"
+        android:gravity="center"
+        android:text="제보하기"
+        android:textColor="@color/cwhite"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</LinearLayout>
