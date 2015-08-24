@@ -4,6 +4,13 @@
     android:background="@color/cgray3"
     android:orientation="vertical">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toobar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cyellow"
+        android:elevation="3dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -26,10 +33,14 @@
             android:layout_weight="1"
             android:background="@color/cwhite"
             android:hint="펍이름이나 지명을 검색해 주세요."
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:singleLine="true"
             android:textColorHint="#b3b3b3"
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/btn_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"

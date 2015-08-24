@@ -34,8 +34,6 @@ public class SignupFragment extends Fragment {
         mContext = getActivity();
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.l_fragment_signup, container, false);

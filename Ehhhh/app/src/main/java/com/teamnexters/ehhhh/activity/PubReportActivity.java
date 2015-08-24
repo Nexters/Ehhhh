@@ -7,7 +7,7 @@ import android.view.MenuItem;
 
 import com.teamnexters.ehhhh.R;
 
-public class PubReport extends AppCompatActivity {
+public class PubReportActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

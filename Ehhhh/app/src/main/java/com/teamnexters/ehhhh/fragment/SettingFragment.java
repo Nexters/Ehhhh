@@ -1,3 +1,4 @@
+/*
 package com.teamnexters.ehhhh.fragment;
 
 import android.content.Context;
@@ -9,23 +10,20 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.LogInCallback;
-import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.teamnexters.ehhhh.R;
 import com.teamnexters.ehhhh.activity.PubReport;
 import com.teamnexters.ehhhh.activity.VersionActivity;
 
-import junit.runner.Version;
-
+*/
 /**
  * Created by 슬기 on 2015-08-21.
  * 설정화면
- */
+ *//*
+
 public class SettingFragment extends Fragment {
 
     private static final String TAG = "SettingFragement";
@@ -39,7 +37,7 @@ public class SettingFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.l_fragment_setting, container, false);
+        View rootView = inflater.inflate(R.layout.l_activity_setting, container, false);
         rootView.setTag(TAG);
 
         TextView btn_logout = (TextView) rootView.findViewById(R.id.btn_logout);
@@ -71,7 +69,7 @@ public class SettingFragment extends Fragment {
         setting_report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(mContext, PubReport.class));
+                startActivity(new Intent(mContext, PubReportActivity.class));
             }
         });
 
@@ -108,4 +106,4 @@ public class SettingFragment extends Fragment {
 
         return rootView;
     }
-}
+}*/

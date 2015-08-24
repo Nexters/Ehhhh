@@ -1,3 +1,4 @@
+/*
 package com.teamnexters.ehhhh.activity;
 
 import android.content.Context;
@@ -13,9 +14,11 @@ import android.widget.TextView;
 
 import com.teamnexters.ehhhh.R;
 
+*/
 /**
  * Created by 현식 on 2015-08-22.
- */
+ *//*
+
 public class VersionActivity extends AppCompatActivity {
 
     Context mContext;
@@ -76,3 +79,4 @@ public class VersionActivity extends AppCompatActivity {
     }
 
 }
+*/

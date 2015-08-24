@@ -15,8 +15,6 @@ import com.teamnexters.ehhhh.activity.PubDetailActivity;
 import com.teamnexters.ehhhh.activity.PubSubMapActivity;
 import com.teamnexters.ehhhh.common.ItemData;
 
-import java.util.ArrayList;
-
 /**
  * Created by csk on 2015-07-23.
  */
@@ -33,7 +31,6 @@ public class PubAdapter extends RecyclerView.Adapter<PubAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pub, parent, false);
         mContext = parent.getContext();
 
@@ -85,7 +82,6 @@ public class PubAdapter extends RecyclerView.Adapter<PubAdapter.ViewHolder> {
             mMapBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     Intent mapIntent = new Intent(mContext, PubSubMapActivity.class);
                     mapIntent.putExtra("pub_address", textAddress.getText().toString());
                     mapIntent.putExtra("pub_name", textPubName.getText().toString());
@@ -96,7 +92,6 @@ public class PubAdapter extends RecyclerView.Adapter<PubAdapter.ViewHolder> {
 
         @Override
         public void onClick(View v) {
-
             // Edit by csk 2015-08-11 : 펍 상세화면 추가
             Intent intent = new Intent(mContext, PubDetailActivity.class);
             intent.putExtra("pub_id", textPubName.getText().toString());

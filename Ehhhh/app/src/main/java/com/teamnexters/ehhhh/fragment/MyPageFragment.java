@@ -1,28 +1,24 @@
 package com.teamnexters.ehhhh.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.parse.ParseUser;
 import com.teamnexters.ehhhh.R;
-import com.teamnexters.ehhhh.util.AppPreference;
+import com.teamnexters.ehhhh.activity.SettingActivity;
 import com.teamnexters.ehhhh.adapter.BookmarkAdapter;
-import com.teamnexters.ehhhh.adapter.HomeAdapter;
-import com.teamnexters.ehhhh.adapter.PubAdapter;
 import com.teamnexters.ehhhh.common.ItemData;
+import com.teamnexters.ehhhh.util.AppPreference;
 
 /**
  * Created by 현식 on 2015-08-20.
@@ -39,6 +35,7 @@ public class MyPageFragment extends Fragment {
     BookmarkAdapter mAdapter;
 
     private static final String KEY_LAYOUT_MANAGER = "layoutmanager";
+
     private enum LayoutManagerType {
         LINEAR_LAYOUT_MANAGER
     }
@@ -59,8 +56,6 @@ public class MyPageFragment extends Fragment {
 
         AppPreference.saveName(mContext, parseUser.getUsername());
         AppPreference.saveMail(mContext, parseUser.getEmail());
-
-        //슬기
 
         // 즐겨찾기 리스트
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
@@ -89,12 +84,14 @@ public class MyPageFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // 설정화면 이동
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                /*FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 SettingFragment fragment = new SettingFragment();
                 transaction.replace(R.id.content_fragment, fragment);
-                transaction.commit();
+                transaction.commit();*/
+                startActivity(new Intent(mContext, SettingActivity.class));
             }
         });
+
         rootView.findViewById(R.id.layout_all).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,14 +130,4 @@ public class MyPageFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.scrollToPosition(scrollPosition);
     }
-
-
-
-//    public void getUserData() {
-//        ParseUser parseUser;
-//        parseUser = ParseUser.getCurrentUser();
-//
-//        AppPreference.saveName(mContext, parseUser.getUsername());
-//        AppPreference.saveMail(mContext, parseUser.getEmail());
-//    }
 }

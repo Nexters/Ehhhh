@@ -30,32 +30,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.SplashActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:noHistory="true"
             android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" />
-        <activity
-            android:name=".activity.SearchActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:label="@string/title_activity_search"
-            android:theme="@style/MyActionBar" />
+
+        <activity android:name=".activity.SearchActivity" />
+
         <activity
             android:name=".activity.PubActivity"
             android:configChanges="keyboardHidden|orientation"
             android:theme="@style/MyActionBar" />
+
         <activity
             android:name=".activity.PubDetailActivity"
             android:configChanges="keyboardHidden|orientation"
             android:theme="@style/MyActionBar" />
+
         <activity
             android:name=".activity.PubSubMapActivity"
             android:configChanges="keyboardHidden|orientation"
             android:theme="@style/MyActionBar" />
 
-        <activity android:name=".activity.PubReport" />
+        <activity android:name=".activity.PubReportActivity" />
 
         <activity android:name=".activity.VersionActivity" />
+
+        <activity android:name=".activity.SettingActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -63,11 +66,6 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-
 
     </application>
-
 </manifest>
