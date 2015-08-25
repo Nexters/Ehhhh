@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.teamnexters.ehhhh.R;
@@ -30,13 +31,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private final ImageView imageView;
+        private final LinearLayout item_back;
         public TextView title, location, subject;
 
         public ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            imageView = (ImageView) itemView.findViewById(R.id.pub_photo);
+            item_back = (LinearLayout) itemView.findViewById(R.id.item_back);
             title = (TextView) itemView.findViewById(R.id.pub_title);
             location = (TextView) itemView.findViewById(R.id.pub_location);
             subject = (TextView) itemView.findViewById(R.id.pub_subject);
@@ -64,7 +65,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         Log.d(TAG, "Element " + position + " set.");
 
         try {
-            holder.imageView.setBackground(mContext.getResources().getDrawable(mDataSet[position].getImageUrl()));
+            holder.item_back.setBackground(mContext.getResources().getDrawable(mDataSet[position].getImageUrl()));
             holder.title.setText(mDataSet[position].getTitle());
             holder.location.setText(mDataSet[position].getLocation());
             holder.subject.setText(mDataSet[position].getSubject());

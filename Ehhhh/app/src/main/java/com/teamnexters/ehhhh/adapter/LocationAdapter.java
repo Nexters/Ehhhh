@@ -61,7 +61,6 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Log.d(TAG, "Element " + position + " set.");
-
         try {
             holder.imageView.setBackground(mContext.getResources().getDrawable(itemsData[position].getImageUrl()));
             holder.textView.setText(itemsData[position].getTitle());

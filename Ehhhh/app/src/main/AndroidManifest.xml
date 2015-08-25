@@ -23,7 +23,8 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,8 +42,7 @@
 
         <activity
             android:name=".activity.PubActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:theme="@style/MyActionBar" />
+            android:configChanges="keyboardHidden|orientation" />
 
         <activity
             android:name=".activity.PubDetailActivity"
@@ -56,7 +56,6 @@
 
         <activity android:name=".activity.PubReportActivity" />
 
-        <activity android:name=".activity.VersionActivity" />
 
         <activity android:name=".activity.SettingActivity" />
 

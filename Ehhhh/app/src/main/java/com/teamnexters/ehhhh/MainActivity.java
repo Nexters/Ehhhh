@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.teamnexters.ehhhh.activity.SearchActivity;
 import com.teamnexters.ehhhh.activity.SplashActivity;
@@ -74,5 +75,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private long backKeyPressedTime = 0;
+
+    @Override
+    public void onBackPressed() {
+        closAppDialog();
+    }
+
+    public void closAppDialog() {
+        if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+            super.onBackPressed();
+            finish();
+        } else {
+            backKeyPressedTime = System.currentTimeMillis();
+            Toast.makeText(mContext, getResources().getString(R.string.close_app), Toast.LENGTH_SHORT).show();
+        }
     }
 }
