@@ -165,7 +165,7 @@
                         android:id="@+id/pub_subject"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="펍에 대한 상세 설명입니다. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리 나라 만세. 이 내용은 추후 꼭 삭제해야합니다."
+                        android:text="펍에 대한 상세 설명입니다."
                         android:textColor="@color/cblack"
                         android:textSize="14sp" />
 
@@ -186,6 +186,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="24dp"
+                                android:layout_marginLeft="5dp"
                                 android:layout_marginRight="40dp"
                                 android:src="@drawable/ic_pin_org" />
 
@@ -193,6 +194,7 @@
                                 android:id="@+id/pub_info_addr"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
                                 android:text="서울 용산구 이태원동 691"
                                 android:textColor="@android:color/darker_gray"
                                 android:textSize="14sp" />

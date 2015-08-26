@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.teamnexters.ehhhh.activity.SearchActivity;
+import com.teamnexters.ehhhh.activity.SettingActivity;
 import com.teamnexters.ehhhh.activity.SplashActivity;
 import com.teamnexters.ehhhh.adapter.MainAdapter;
 
@@ -64,7 +65,9 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.floatingbutton).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(mContext, SearchActivity.class));
+                    // edit by 슬기 2015-08-26 : 마이페이지 화면 갱신하기 위해 파라미터 추가
+                    //startActivity(new Intent(mContext, SearchActivity.class));
+                    startActivityForResult(new Intent(mContext, SearchActivity.class), 100);
                 }
             });
         } catch (Exception e) {

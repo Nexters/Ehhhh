@@ -7,12 +7,16 @@ import android.os.Handler;
 import android.widget.ImageView;
 
 import com.teamnexters.ehhhh.R;
+import com.teamnexters.ehhhh.common.PubInfo;
+
+import java.util.ArrayList;
 
 /**
  * Created by HyeonSi on 2015-07-09.
  */
 public class SplashActivity extends Activity {
 
+    public static ArrayList<PubInfo> pubList;
     ImageView splash_img;
     AnimationDrawable splash_anim;
 

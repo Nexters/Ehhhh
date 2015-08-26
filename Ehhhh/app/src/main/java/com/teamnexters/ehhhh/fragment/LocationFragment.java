@@ -5,12 +5,22 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.teamnexters.ehhhh.R;
 import com.teamnexters.ehhhh.adapter.LocationAdapter;
+import com.teamnexters.ehhhh.common.PubInfo;
+import com.teamnexters.ehhhh.common.Recommend;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LocationFragment extends Fragment {
 
@@ -22,35 +32,10 @@ public class LocationFragment extends Fragment {
     protected RecyclerView.LayoutManager mLayoutManager;
     protected LocationAdapter mAdapter;
 
+    ArrayList<PubInfo> pubList;
+
     private enum LayoutManagerType {
         LINEAR_LAYOUT_MANAGER
-    }
-
-    public class ItemData {
-        private String title;
-        private int imageUrl;
-
-        public ItemData(String title, int imageUrl) {
-            this.title = title;
-            this.imageUrl = imageUrl;
-        }
-
-        // getters & setters
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public int getImageUrl() {
-            return imageUrl;
-        }
-
-        public void setImageUrl(int imageUrl) {
-            this.imageUrl = imageUrl;
-        }
     }
 
     public static Fragment newInstance() {
@@ -79,16 +64,48 @@ public class LocationFragment extends Fragment {
             mLayoutManagerType = (LayoutManagerType) savedInstanceState.getSerializable(KEY_LAYOUT_MANAGER);
         }
 
-        ItemData mDataset[] = {new ItemData("강남구", R.drawable.back_gangnam),
-                new ItemData("용산구", R.drawable.back_youngsan),
-                new ItemData("마포구", R.drawable.back_mapo),
-                new ItemData("용산구", R.drawable.back_youngsan)};
+        // Edit by 슬기 2015-08-25 : 서버데이터 로드 추가
+        pubList = new ArrayList<>();
 
-        setRecyclerViewLayoutManager(mLayoutManagerType);
+        final PubInfo[] comparePub = {null};
 
-        mAdapter = new LocationAdapter(mDataset);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("PubInfo");
+        query.orderByAscending("district");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, ParseException e) {
+                if (e == null) {
+                    for (ParseObject object : list) {
+
+                        if (comparePub[0] == null) {
+                            comparePub[0] = new PubInfo();
+                            comparePub[0].setDistrict(object.getString("district"));  //구,구분
+                            comparePub[0].setCount(1);
+                        } else if (comparePub[0].getDistrict().equals(object.getString("district"))) {
+                            int count = comparePub[0].getCount();
+                            comparePub[0].setCount(count + 1);
+                        } else {
+                            pubList.add(comparePub[0]);
+                            comparePub[0] = new PubInfo();
+                            comparePub[0].setDistrict(object.getString("district"));  //구,구분
+                            comparePub[0].setCount(1);
+                        }
+                    }
+                    pubList.add(comparePub[0]);
+                } else {
+                    Log.d("chasksk", "ParseQuery Error: " + e.getMessage());
+                }
+
+                setRecyclerViewLayoutManager(mLayoutManagerType);
+
+                mAdapter = new LocationAdapter(pubList);
+                mRecyclerView.setAdapter(mAdapter);
+                mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+            }
+        });
+
+
 
 
         return rootView;

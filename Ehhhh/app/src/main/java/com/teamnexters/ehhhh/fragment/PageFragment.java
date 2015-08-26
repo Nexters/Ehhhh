@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,25 +45,15 @@ public class PageFragment extends Fragment {
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
             MyPageFragment fragment = new MyPageFragment();
             transaction.replace(R.id.content_fragment, fragment);
-
             transaction.commit();
         } else {
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
             LoginFragment fragment = new LoginFragment();
             transaction.replace(R.id.content_fragment, fragment);
-
             transaction.commit();
         }
 
 
         return rootView;
     }
-
-//    public void changeSignup() {
-//        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//        SignupFragment fragment = new SignupFragment();
-//        transaction.replace(R.id.content_fragment, fragment);
-//
-//        transaction.commit();
-//    }
 }

@@ -11,10 +11,13 @@ import android.widget.TextView;
 
 import com.teamnexters.ehhhh.R;
 import com.teamnexters.ehhhh.activity.PubDetailActivity;
-import com.teamnexters.ehhhh.common.ItemData;
+import com.teamnexters.ehhhh.common.PubInfo;
+
+import java.util.ArrayList;
 
 /**
  * Created by csk on 2015-07-23.
+ * Edit by 슬기 2015-08-25.
  */
 public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHolder> {
 
@@ -22,10 +25,10 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
     static Context mContext;
     boolean isAllview;
 
-    private ItemData[] itemsData;
+    private ArrayList<PubInfo> mDataSet;
 
-    public BookmarkAdapter(ItemData[] itemsData) {
-        this.itemsData = itemsData;
+    public BookmarkAdapter(ArrayList<PubInfo> mDataSet) {
+        this.mDataSet = mDataSet;
         this.isAllview = false;
     }
 
@@ -47,10 +50,21 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
-
             // Edit by csk 2015-08-11 : 펍 상세화면 추가
+            // Edit by 슬기 2015-08-25 : 파라미터 수정
             Intent intent = new Intent(mContext, PubDetailActivity.class);
-            intent.putExtra("pub_id", textPubName.getText().toString());
+            PubInfo pub = (PubInfo) textPubName.getTag();
+            intent.putExtra("pubId", pub.getObjectId());
+            intent.putExtra("name", pub.getName());
+            intent.putExtra("nameEng", pub.getNameEng());
+            intent.putExtra("phone", pub.getPhone());
+            intent.putExtra("district", pub.getDistrict());//구,구분
+            intent.putExtra("adress", pub.getAdress());
+            intent.putExtra("time", pub.getTime());//영업시간
+            intent.putExtra("info1", pub.getInfo1());
+            intent.putExtra("info2", pub.getInfo2());
+            intent.putExtra("etc", pub.getEtc());
+            intent.putExtra("bookmark", pub.getBookmarkYN());
             mContext.startActivity(intent);
         }
     }
@@ -71,8 +85,9 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
         Log.d(TAG, "Element " + position + " set.");
 
         try {
-            holder.textPubName.setText(itemsData[position].getPubName());
-            holder.textAddress.setText(itemsData[position].getAddress());
+            holder.textPubName.setText(mDataSet.get(position).getName());
+            holder.textAddress.setText(mDataSet.get(position).getAdress());
+            holder.textPubName.setTag(mDataSet.get(position));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -80,8 +95,13 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
 
     @Override
     public int getItemCount() {
+        int totalCnt = mDataSet.size();
+        if(totalCnt < 3) {
+            return mDataSet.size();
+        }
+
         if(isAllview) {
-            return itemsData.length;
+            return mDataSet.size();
         } else {
             return 2;
         }

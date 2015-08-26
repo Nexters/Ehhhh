@@ -3,7 +3,6 @@ package com.teamnexters.ehhhh.activity;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,9 +19,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.teamnexters.ehhhh.R;
 import com.teamnexters.ehhhh.adapter.PubAdapter;
-import com.teamnexters.ehhhh.common.ItemData;
+import com.teamnexters.ehhhh.common.PubInfo;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,6 +36,7 @@ import java.util.Locale;
 
 /**
  * Created by csk on 2015-07-23.
+ * Edit by 슬기 2015-08-25.
  */
 public class PubActivity extends AppCompatActivity {
 
@@ -40,7 +44,7 @@ public class PubActivity extends AppCompatActivity {
     private ArrayList<String> mAddressList = new ArrayList<String>();
     private ArrayList<String> mPubNameList = new ArrayList<String>();
 
-    private static final String TAG = "PubFragement";
+    private static final String TAG = "PubActivity";
     private static final String KEY_LAYOUT_MANAGER = "layoutmanager";
 
     protected LayoutManagerType mLayoutManagerType;
@@ -53,12 +57,15 @@ public class PubActivity extends AppCompatActivity {
     private HashMap<Marker, Integer> mHashMap = new HashMap<Marker, Integer>();
     private int mMarkerPos;
 
+    ArrayList<PubInfo> pubList;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.l_activity_pub);
 
-        String location = getIntent().getExtras().getString(ARG_PARAM);
+        final String location = getIntent().getExtras().getString(ARG_PARAM);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toobar);
         toolbar.setTitle(location);
@@ -75,22 +82,81 @@ public class PubActivity extends AppCompatActivity {
             mLayoutManagerType = (LayoutManagerType) savedInstanceState.getSerializable(KEY_LAYOUT_MANAGER);
         }
 
-        ItemData mDataset[] = {new ItemData("네이버후드", "서울특별시 서대문구 창천동 54-24", "02)342-3291"),
-                new ItemData("메이드 인 퐁당", "서울특별시 용산구 녹사평대로 222-1", "02)321-0041"),
-                new ItemData("크라켄 1호점", "서울특별시 서초구 반포동 512-1", "02)231-1321"),
-                new ItemData("옐로우펍", "서울특별시 마포구 독막로9길 41", "02)4345-2342"),
-                new ItemData("AweSome", "서울특별시 마포구 독막로3길 20", "02)234-1121"),};
+        // Edit by 슬기 2015-08-25 : 서버데이터 로드 추가
+        pubList = new ArrayList<>();
 
-        setRecyclerViewLayoutManager(mLayoutManagerType);
+//        ParseUser parseUser = ParseUser.getCurrentUser();
+//        String email = null;
+//        if(parseUser != null)
+//            email = parseUser.getEmail();
 
-        mAdapter = new PubAdapter(mDataset);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        setAddress();
-        setPubName();
-        // maps
-        setUpMapIfNeeded();
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("PubInfo");
+            query.whereEqualTo("district", location);
+            query.orderByAscending("name");
+            query.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> list, ParseException e) {
+                    if (e == null) {
+                        for (ParseObject object : list) {
+                            PubInfo pub = new PubInfo();
+                            pub.setObjectId(object.getObjectId());
+                            pub.setName(object.getString("name"));
+                            pub.setNameEng(object.getString("nameEng"));
+                            pub.setPhone(object.getString("phone"));
+                            pub.setDistrict(object.getString("district"));  //구,구분
+                            pub.setAdress(object.getString("adress"));
+                            pub.setTime(object.getString("time"));          //영업시간
+                            pub.setInfo1(object.getString("info1"));
+                            pub.setInfo2(object.getString("info2"));
+                            pub.setEtc(object.getString("etc"));
+
+                            // bookmark check
+                            ParseUser parseUser = ParseUser.getCurrentUser();
+                            String email = null;
+                            if(parseUser != null) {
+                                email = parseUser.getEmail();
+                                ParseQuery<ParseObject> bookmarkQuery = ParseQuery.getQuery("Bookmark");
+                                bookmarkQuery.whereEqualTo("email", email);
+                                try {
+                                    for(ParseObject bookmark : bookmarkQuery.find()) {
+                                        if(bookmark.get("pubId").equals(object.getObjectId())) {
+                                            pub.setBookmarkYN(true);
+                                            break;
+                                        }
+                                    }
+                                } catch (ParseException e1) {
+                                    //e1.printStackTrace();
+                                    Log.d("chasksk", "ParseQuery Error: " + e1.getMessage());
+                                }
+                            }
+
+                            pubList.add(pub);
+                        }
+                    } else {
+                        Log.d("chasksk", "ParseQuery Error: " + e.getMessage());
+                    }
+
+                    setRecyclerViewLayoutManager(mLayoutManagerType);
+
+                    mAdapter = new PubAdapter(pubList);
+                    mRecyclerView.setAdapter(mAdapter);
+                    mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+                    setAddress();
+                    setPubName();
+                    // maps
+                    setUpMapIfNeeded();
+
+                }
+            });
+//                    }
+//                }
+//            }
+//        });
+
+
+
     }
 
     private void setAddress() {

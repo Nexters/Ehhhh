@@ -1,5 +1,6 @@
 package com.teamnexters.ehhhh.activity;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.parse.ParseUser;
 import com.teamnexters.ehhhh.R;
+import com.teamnexters.ehhhh.fragment.PageFragment;
 
 /**
  * Created by HyeonSi on 2015-08-24.
@@ -56,7 +58,7 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ParseUser.logOut();
                 Toast.makeText(mContext, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
-                finish();
+                onBackPressed();//finish();
                 /*FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 LoginFragment fragment = new LoginFragment();
                 transaction.replace(R.id.content_fragment, fragment);
@@ -73,12 +75,19 @@ public class SettingActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        //startActivity(new Intent(mContext, PubReportActivity.class));
+
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case android.R.id.home:
-                finish();
+                onBackPressed();//finish();
         }
         return (super.onOptionsItemSelected(menuItem));
     }
