@@ -31,7 +31,6 @@ public class SplashActivity extends Activity {
 
         splash_anim.start();
 
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override

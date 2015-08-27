@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -59,7 +60,6 @@ public class PubActivity extends AppCompatActivity {
 
     ArrayList<PubInfo> pubList;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +78,8 @@ public class PubActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
 
+        final TextView pubCountTextView = (TextView) findViewById(R.id.activity_pub_count);  //hy.jung
+
         if (savedInstanceState != null) {
             mLayoutManagerType = (LayoutManagerType) savedInstanceState.getSerializable(KEY_LAYOUT_MANAGER);
         }
@@ -85,87 +87,75 @@ public class PubActivity extends AppCompatActivity {
         // Edit by 슬기 2015-08-25 : 서버데이터 로드 추가
         pubList = new ArrayList<>();
 
-//        ParseUser parseUser = ParseUser.getCurrentUser();
-//        String email = null;
-//        if(parseUser != null)
-//            email = parseUser.getEmail();
-
-
-            ParseQuery<ParseObject> query = ParseQuery.getQuery("PubInfo");
-            query.whereEqualTo("district", location);
-            query.orderByAscending("name");
-            query.findInBackground(new FindCallback<ParseObject>() {
-                @Override
-                public void done(List<ParseObject> list, ParseException e) {
-                    if (e == null) {
-                        for (ParseObject object : list) {
-                            PubInfo pub = new PubInfo();
-                            pub.setObjectId(object.getObjectId());
-                            pub.setName(object.getString("name"));
-                            pub.setNameEng(object.getString("nameEng"));
-                            pub.setPhone(object.getString("phone"));
-                            pub.setDistrict(object.getString("district"));  //구,구분
-                            pub.setAdress(object.getString("adress"));
-                            pub.setTime(object.getString("time"));          //영업시간
-                            pub.setInfo1(object.getString("info1"));
-                            pub.setInfo2(object.getString("info2"));
-                            pub.setEtc(object.getString("etc"));
-
-                            // bookmark check
-                            ParseUser parseUser = ParseUser.getCurrentUser();
-                            String email = null;
-                            if(parseUser != null) {
-                                email = parseUser.getEmail();
-                                ParseQuery<ParseObject> bookmarkQuery = ParseQuery.getQuery("Bookmark");
-                                bookmarkQuery.whereEqualTo("email", email);
-                                try {
-                                    for(ParseObject bookmark : bookmarkQuery.find()) {
-                                        if(bookmark.get("pubId").equals(object.getObjectId())) {
-                                            pub.setBookmarkYN(true);
-                                            break;
-                                        }
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("PubInfo");
+        query.whereEqualTo("district", location);
+        query.orderByAscending("name");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, ParseException e) {
+                if (e == null) {
+                    for (ParseObject object : list) {
+                        PubInfo pub = new PubInfo();
+                        pub.setObjectId(object.getObjectId());
+                        pub.setName(object.getString("name"));
+                        pub.setNameEng(object.getString("nameEng"));
+                        pub.setPhone(object.getString("phone"));
+                        pub.setDistrict(object.getString("district"));  //구,구분
+                        pub.setAdress(object.getString("adress"));
+                        pub.setTime(object.getString("time"));          //영업시간
+                        pub.setInfo1(object.getString("info1"));
+                        pub.setInfo2(object.getString("info2"));
+                        pub.setEtc(object.getString("etc"));
+                        // bookmark check
+                        ParseUser parseUser = ParseUser.getCurrentUser();
+                        String email = null;
+                        if (parseUser != null) {
+                            email = parseUser.getEmail();
+                            ParseQuery<ParseObject> bookmarkQuery = ParseQuery.getQuery("Bookmark");
+                            bookmarkQuery.whereEqualTo("email", email);
+                            try {
+                                for (ParseObject bookmark : bookmarkQuery.find()) {
+                                    if (bookmark.get("pubId").equals(object.getObjectId())) {
+                                        pub.setBookmarkYN(true);
+                                        break;
                                     }
-                                } catch (ParseException e1) {
-                                    //e1.printStackTrace();
-                                    Log.d("chasksk", "ParseQuery Error: " + e1.getMessage());
                                 }
+                            } catch (ParseException e1) {
+                                e1.printStackTrace();
+                                Log.d("chasksk", "ParseQuery Error: " + e1.getMessage());
                             }
-
-                            pubList.add(pub);
                         }
-                    } else {
-                        Log.d("chasksk", "ParseQuery Error: " + e.getMessage());
+                        pubList.add(pub);
                     }
-
-                    setRecyclerViewLayoutManager(mLayoutManagerType);
-
-                    mAdapter = new PubAdapter(pubList);
-                    mRecyclerView.setAdapter(mAdapter);
-                    mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
-                    setAddress();
-                    setPubName();
-                    // maps
-                    setUpMapIfNeeded();
-
+                } else {
+                    Log.d("chasksk", "ParseQuery Error: " + e.getMessage());
                 }
-            });
-//                    }
-//                }
-//            }
-//        });
 
+                setRecyclerViewLayoutManager(mLayoutManagerType);
 
+                mAdapter = new PubAdapter(pubList);
+                mRecyclerView.setAdapter(mAdapter);
+                mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
+                setAddress();
+                setPubName();
+                // maps
+                setUpMapIfNeeded();
+
+                pubCountTextView.setText(String.valueOf(mAdapter.getItemCount()) + "건");    //hy.jung
+            }
+        });
     }
 
     private void setAddress() {
+        //hy.jung
         for (int i = 0; i < mAdapter.getItemCount(); i++) {
             mAddressList.add(i, mAdapter.getAdapterAddress(i));
         }
     }
 
     private void setPubName() {
+        //hy.jung
         for (int i = 0; i < mAdapter.getItemCount(); i++) {
             mPubNameList.add(i, mAdapter.getAdapterPubName(i));
         }
@@ -182,7 +172,7 @@ public class PubActivity extends AppCompatActivity {
 
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
-
+        //hy.jung
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         List<Address> addresses = null;
         double latitude = 0;
@@ -198,13 +188,11 @@ public class PubActivity extends AppCompatActivity {
                 for (int maker = 0; maker < mAdapter.getItemCount(); maker++) {
                     try {
                         addresses = geocoder.getFromLocationName(mAddressList.get(maker), 10);
-
                         if (addresses.size() > 0) {
                             latitude = addresses.get(0).getLatitude();
                             longitude = addresses.get(0).getLongitude();
                             pointer = new LatLng(latitude, longitude);
                             bounds.include(pointer).build();
-
                             setUpMap(pointer, mAddressList.get(maker), mPubNameList.get(maker), bounds, maker);
                         }
                     } catch (IOException e) {
@@ -216,7 +204,7 @@ public class PubActivity extends AppCompatActivity {
     }
 
     private void setUpMap(LatLng loc, String addressName, String pubName, LatLngBounds.Builder bounds1, int pos) {
-
+        //hy.jung
         final LatLngBounds bounds = bounds1.build();
         MarkerOptions markerOpt = new MarkerOptions();
         markerOpt.icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_dim));
@@ -249,20 +237,20 @@ public class PubActivity extends AppCompatActivity {
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {
-                mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 200));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 150));  //hy.jung
                 mMap.setOnCameraChangeListener(null);
             }
         });
         //        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 10));
         Marker tmp_marker = mMap.addMarker(markerOpt.position(loc).title(pubName));
+        //tmp_marker.showInfoWindow();
         mHashMap.put(tmp_marker, pos);
     }
 
     private void markerSelected() {
-        Log.e("TEST", "mMarkerPos : " + mMarkerPos + " mRecyclerView.isSelected() : " + mRecyclerView.isSelected());
-        mRecyclerView.smoothScrollToPosition(mMarkerPos);
-
-//        mRecyclerView.setSelected(true);
+        //hy.jung
+        if (mRecyclerView != null)
+            mRecyclerView.smoothScrollToPosition(mMarkerPos);
     }
 
     private enum LayoutManagerType {

@@ -18,8 +18,34 @@
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_height="347dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@color/cyellow"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:text="검색결과"
+                android:textColor="#5f5e5e"
+                android:textSize="12sp"
+                android:typeface="sans" />
+
+            <TextView
+                android:id="@+id/activity_pub_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="6dp"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:typeface="sans" />
+        </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"

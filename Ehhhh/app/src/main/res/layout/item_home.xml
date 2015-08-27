@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Subject"
+        android:typeface="sans"
         android:textColor="@color/cyellow"
         android:textSize="19sp" />
 
@@ -21,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Title"
+        android:typeface="sans"
         android:textColor="@color/cwhite"
         android:textSize="37dp"
         android:textStyle="bold" />
@@ -30,6 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Location"
+        android:typeface="sans"
         android:textColor="#e2e2e2"
         android:textSize="19sp" />
 

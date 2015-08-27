@@ -3,12 +3,6 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorPrimaryDark">@color/cyellow2</item>
-        <item name="android:actionBarTabStyle">@style/MyActionBarTabs</item>
-    </style>
-
-    <style name="MyActionBarTabs" parent="Widget.AppCompat.ActionBar.TabView">
-        <!-- tab indicator -->
-        <item name="android:background">@drawable/theme_tap</item>
     </style>
 
 

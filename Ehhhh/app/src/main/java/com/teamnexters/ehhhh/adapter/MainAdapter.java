@@ -28,7 +28,7 @@ public class MainAdapter extends FragmentStatePagerAdapter {
             case 2:
                 return PageFragment.newInstance();
             default:
-                return null;
+                return HomeFragment.newInstance();
         }
     }
 

@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.teamnexters.ehhhh.activity.SearchActivity;
-import com.teamnexters.ehhhh.activity.SettingActivity;
 import com.teamnexters.ehhhh.activity.SplashActivity;
 import com.teamnexters.ehhhh.adapter.MainAdapter;
 

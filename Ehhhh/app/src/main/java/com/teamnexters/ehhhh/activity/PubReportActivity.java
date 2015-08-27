@@ -1,9 +1,7 @@
 package com.teamnexters.ehhhh.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
 
 import com.teamnexters.ehhhh.R;
 
@@ -14,5 +12,4 @@ public class PubReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.l_activity_report);
     }
-
 }

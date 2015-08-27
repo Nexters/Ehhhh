@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:text="강남구"
+        android:typeface="sans"
         android:textColor="@color/cwhite"
         android:textSize="34sp"
         android:textStyle="bold" />
@@ -29,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="17"
+            android:typeface="sans"
             android:textColor="#e2e2e2"
             android:textSize="14sp" />
 
@@ -36,6 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="개의 펍"
+            android:typeface="sans"
             android:textColor="#e2e2e2"
             android:textSize="14sp" />
     </LinearLayout>

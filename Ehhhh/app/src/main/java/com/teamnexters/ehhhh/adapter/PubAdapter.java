@@ -44,7 +44,7 @@ public class PubAdapter extends RecyclerView.Adapter<PubAdapter.ViewHolder> {
         public TextView textPubName;
         public TextView textAddress;
         public TextView textPhone;
-        public ImageView mMapBtn;
+       // public ImageView mMapBtn;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -58,18 +58,6 @@ public class PubAdapter extends RecyclerView.Adapter<PubAdapter.ViewHolder> {
             textPubName = (TextView) itemView.findViewById(R.id.item_pub_name);
             textAddress = (TextView) itemView.findViewById(R.id.item_address);
             textPhone = (TextView) itemView.findViewById(R.id.item_phone);
-            mMapBtn = (ImageView) itemView.findViewById(R.id.map_btn);
-
-            //hy.jung   sub map click
-            mMapBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent mapIntent = new Intent(mContext, PubSubMapActivity.class);
-                    mapIntent.putExtra("pub_address", textAddress.getText().toString());
-                    mapIntent.putExtra("pub_name", textPubName.getText().toString());
-                    mContext.startActivity(mapIntent);
-                }
-            });
         }
 
         @Override

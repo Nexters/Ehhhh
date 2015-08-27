@@ -52,17 +52,17 @@ public class PubDetailActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.pub_info_addr)).setText(adress);
         ((TextView) findViewById(R.id.pub_info_time)).setText(time);
 
-        if(info1 == null || info1.equals(""))
+        if (info1 == null || info1.equals(""))
             (findViewById(R.id.pub_summary)).setVisibility(View.GONE);
         else
             ((TextView) findViewById(R.id.pub_summary)).setText(info1);
 
-        if(info2 == null || info2.equals(""))
+        if (info2 == null || info2.equals(""))
             (findViewById(R.id.pub_subject)).setVisibility(View.GONE);
         else
             ((TextView) findViewById(R.id.pub_subject)).setText(info2);
 
-        if(etc == null || etc.equals(""))
+        if (etc == null || etc.equals(""))
             (findViewById(R.id.pub_info_etc)).setVisibility(View.GONE);
         else
             ((TextView) findViewById(R.id.pub_info_etc)).setText(etc);
@@ -73,14 +73,14 @@ public class PubDetailActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
-
         // button
         findViewById(R.id.floatingbutton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PubActivity.class);
-                intent.putExtra("location", district);
-                startActivity(intent);
+                Intent mapIntent = new Intent(getApplicationContext(), PubSubMapActivity.class);
+                mapIntent.putExtra("pub_address", adress);
+                mapIntent.putExtra("pub_name", name);
+                startActivity(mapIntent);
             }
         });
 
@@ -98,7 +98,7 @@ public class PubDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 boolean bookmarkYN = v.getTag().equals(true);
                 ParseUser parseUser = ParseUser.getCurrentUser();
-                if(parseUser == null) {
+                if (parseUser == null) {
                     Toast.makeText(getApplicationContext(), "로그인 후 사용하실 수 있습니다.", Toast.LENGTH_SHORT).show();
 
 //                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -109,7 +109,7 @@ public class PubDetailActivity extends AppCompatActivity {
                     String email = parseUser.getEmail();
 
 
-                    if(v.getTag().equals(true)) {
+                    if (v.getTag().equals(true)) {
 //                        Toast.makeText(getApplicationContext(), "즐겨찾기 해제되었습니다.", Toast.LENGTH_SHORT).show();
                         //object.deleteEventually();
                         ParseQuery<ParseObject> bookmarkquery = ParseQuery.getQuery("Bookmark");

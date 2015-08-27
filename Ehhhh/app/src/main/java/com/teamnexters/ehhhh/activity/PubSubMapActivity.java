@@ -2,14 +2,15 @@ package com.teamnexters.ehhhh.activity;
 
 import android.location.Address;
 import android.location.Geocoder;
-import android.media.ExifInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.teamnexters.ehhhh.R;
@@ -33,6 +34,8 @@ public class PubSubMapActivity extends FragmentActivity {
 
         String pubAddress = getIntent().getExtras().getString(intent_address);
         String pubName = getIntent().getExtras().getString(intent_name);
+        Log.e("TEST", "pubAddress : " + pubAddress);
+        Log.e("TEST", "pubName : " + pubName);
         setMap(pubAddress, pubName);
     }
 
@@ -43,6 +46,9 @@ public class PubSubMapActivity extends FragmentActivity {
         double lng = 0;
 
         Toast.makeText(this, name.toString(), Toast.LENGTH_SHORT).show();
+
+        MarkerOptions markerOpt = new MarkerOptions();
+        markerOpt.icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_enable));
 
         mSubMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.sub_map)).getMap();
 
@@ -59,9 +65,9 @@ public class PubSubMapActivity extends FragmentActivity {
                     loc = new LatLng(lat, lng);
 
                     mSubMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 16));
-                    mSubMap.addMarker(new MarkerOptions().position(loc));
+                    mSubMap.addMarker(markerOpt.position(loc).title(name)).showInfoWindow();
+//                    mSubMap.addMarker(new MarkerOptions().position(loc));
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
