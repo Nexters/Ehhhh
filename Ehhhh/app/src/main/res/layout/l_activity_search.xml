@@ -33,20 +33,20 @@
             android:layout_weight="1"
             android:background="@color/cwhite"
             android:hint="펍이름이나 지명을 검색해 주세요."
-            android:imeOptions="actionDone"
+            android:imeOptions="actionSearch"
             android:inputType="text"
             android:singleLine="true"
             android:textColorHint="#b3b3b3"
             android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/btn_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="검색"
-            android:textColor="#999999"
-            android:textSize="16sp" />
+        <ImageView
+            android:id="@+id/search_close"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:visibility="invisible"
+            android:padding="7dp"
+            android:src="@drawable/i_btn_close" />
     </LinearLayout>
 
     <TextView

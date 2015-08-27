@@ -32,7 +32,7 @@ public class PubDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pub_detail);
+        setContentView(R.layout.l_activity_pub_detail);
 
         final String pubId = getIntent().getExtras().getString("pubId");
         final String name = getIntent().getExtras().getString("name");

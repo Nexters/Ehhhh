@@ -4,10 +4,15 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -29,7 +34,7 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.l_activity_search);
         mContext = this;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toobar);
@@ -39,13 +44,46 @@ public class SearchActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         final EditText keyword_txt = (EditText) findViewById(R.id.edit_search);
-        TextView btn_search = (TextView) findViewById(R.id.btn_search);
+        final ImageView search_close = (ImageView) findViewById(R.id.search_close);
 
-        btn_search.setOnClickListener(new View.OnClickListener() {
+        keyword_txt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (i2 == 0) {
+                    search_close.setVisibility(View.INVISIBLE);
+                } else {
+                    search_close.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        keyword_txt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                switch (i) {
+                    case EditorInfo.IME_ACTION_SEARCH:
+                        searching(keyword_txt.getText().toString());
+
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        search_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searching(keyword_txt.getText().toString());
-                Log.e("@@@", "검색!");
+                keyword_txt.setText("");
             }
         });
     }
