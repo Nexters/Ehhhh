@@ -44,9 +44,9 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginRight="10dp"
-            android:visibility="invisible"
             android:padding="7dp"
-            android:src="@drawable/i_btn_close" />
+            android:src="@drawable/btn_search_close"
+            android:visibility="invisible" />
     </LinearLayout>
 
     <TextView

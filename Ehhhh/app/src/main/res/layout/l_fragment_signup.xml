@@ -5,7 +5,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:orientation="vertical">
 
@@ -13,77 +13,134 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="91dp"
             android:gravity="center"
             android:text="사용자 이름 및 비밀번호를\n설정해 주세요."
-            android:textColor="@color/cgray7"
+            android:textColor="@color/cblack"
             android:textSize="24sp" />
 
-
-        <EditText
-            android:id="@+id/signup_name"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="50dp"
-            android:background="@color/cgray2"
-            android:hint="닉네임 설정"
-            android:imeOptions="actionNext"
-            android:inputType="text"
-            android:nextFocusDown="@+id/signup_mail"
-            android:paddingLeft="10dp"
-            android:textColor="@color/cblack"
-            android:textColorHint="@color/cgray8"
-            android:textSize="16sp" />
+            android:background="@color/cgray2">
 
-        <EditText
-            android:id="@+id/signup_mail"
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/ic_user_gray" />
+
+            <EditText
+                android:id="@+id/signup_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="43dp"
+                android:background="@color/cgray2"
+                android:hint="닉네임 설정"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:nextFocusDown="@+id/signup_mail"
+                android:paddingLeft="10dp"
+                android:textColor="@color/cblack"
+                android:textColorHint="@color/cgray8"
+                android:textSize="16sp" />
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="5dp"
-            android:background="@color/cgray2"
-            android:hint="이메일 설정"
-            android:imeOptions="actionNext"
-            android:inputType="textEmailAddress"
-            android:nextFocusDown="@+id/signup_pass"
-            android:paddingLeft="10dp"
-            android:textColor="@color/cblack"
-            android:textColorHint="@color/cgray8"
-            android:textSize="16sp" />
+            android:background="@color/cgray2">
 
-        <EditText
-            android:id="@+id/signup_pass"
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/ic_mail_gray" />
+
+            <EditText
+                android:id="@+id/signup_mail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="43dp"
+                android:background="@color/cgray2"
+                android:hint="이메일 설정"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:nextFocusDown="@+id/signup_pass"
+                android:paddingLeft="10dp"
+                android:textColor="@color/cblack"
+                android:textColorHint="@color/cgray8"
+                android:textSize="16sp" />
+        </FrameLayout>
+
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="5dp"
-            android:background="@color/cgray2"
-            android:hint="비밀번호 설정"
-            android:imeOptions="actionNext"
-            android:inputType="textPassword"
-            android:nextFocusDown="@+id/signup_pass_again"
-            android:paddingLeft="10dp"
-            android:textColorHint="@color/cgray8"
-            android:textSize="16sp" />
+            android:background="@color/cgray2">
 
-        <EditText
-            android:id="@+id/signup_pass_again"
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/ic_pass_gray" />
+
+            <EditText
+                android:id="@+id/signup_pass"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="43dp"
+                android:background="@color/cgray2"
+                android:hint="비밀번호 설정"
+                android:imeOptions="actionNext"
+                android:inputType="textPassword"
+                android:nextFocusDown="@+id/signup_pass_again"
+                android:paddingLeft="10dp"
+                android:textColorHint="@color/cgray8"
+                android:textSize="16sp" />
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="5dp"
-            android:background="@color/cgray2"
-            android:hint="비밀번호 확인"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:paddingLeft="10dp"
-            android:textColorHint="@color/cgray8"
-            android:textSize="16sp" />
+            android:background="@color/cgray2">
+
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/ic_pass_gray" />
+
+            <EditText
+                android:id="@+id/signup_pass_again"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="43dp"
+                android:background="@color/cgray2"
+                android:hint="비밀번호 확인"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:textColorHint="@color/cgray8"
+                android:textSize="16sp" />
+        </FrameLayout>
+
 
         <TextView
             android:id="@+id/btn_signup"
@@ -91,7 +148,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="18dp"
             android:background="@color/cyellow"
             android:gravity="center_horizontal"
             android:padding="20dp"

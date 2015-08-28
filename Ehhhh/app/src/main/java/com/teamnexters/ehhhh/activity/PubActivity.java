@@ -64,7 +64,7 @@ public class PubActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.l_activity_pub);
-
+        Log.e("TEST", "PubActivity");
         final String location = getIntent().getExtras().getString(ARG_PARAM);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toobar);
@@ -237,12 +237,18 @@ public class PubActivity extends AppCompatActivity {
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {
-                mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 150));  //hy.jung
+                if (mAdapter.getItemCount() > 1)
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 150));  //hy.jung
                 mMap.setOnCameraChangeListener(null);
             }
         });
-        //        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 10));
         Marker tmp_marker = mMap.addMarker(markerOpt.position(loc).title(pubName));
+
+        if (mAdapter.getItemCount() < 2) {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 15));
+            tmp_marker.showInfoWindow();
+            tmp_marker.setTitle(pubName);
+        }
         //tmp_marker.showInfoWindow();
         mHashMap.put(tmp_marker, pos);
     }

@@ -17,51 +17,79 @@
                 android:layout_width="wrap_content"
                 android:layout_height="130dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="55dp"
+                android:layout_marginTop="47dp"
                 android:src="@drawable/ic_beerpin" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:text="내가 좋아하거나 자주가는\n펍들을 추가해 보세요."
-                android:textColor="@color/cgray7"
+                android:textColor="@color/cblack"
                 android:textSize="24sp" />
 
 
-            <EditText
-                android:id="@+id/login_name"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
-                android:layout_marginTop="30dp"
-                android:background="@color/cgray2"
-                android:hint="사용자이름"
-                android:imeOptions="actionNext"
-                android:inputType="text"
-                android:nextFocusDown="@+id/login_pass"
-                android:paddingLeft="10dp"
-                android:textColor="@color/cblack"
-                android:textColorHint="@color/cgray8"
-                android:textSize="16sp" />
+                android:layout_marginTop="50dp"
+                android:background="@color/cgray2">
 
-            <EditText
-                android:id="@+id/login_pass"
+                <ImageView
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_mail_gray" />
+
+                <EditText
+                    android:id="@+id/login_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="43dp"
+                    android:background="@color/cgray2"
+                    android:hint="사용자이름"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:nextFocusDown="@+id/login_pass"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/cblack"
+                    android:textColorHint="@color/cgray8"
+                    android:textSize="16sp" />
+            </FrameLayout>
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/cgray2"
-                android:hint="비밀번호"
-                android:imeOptions="actionDone"
-                android:inputType="textPassword"
-                android:paddingLeft="10dp"
-                android:textColorHint="@color/cgray8"
-                android:textSize="16sp" />
+                android:background="@color/cgray2">
+
+                <ImageView
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_pass_gray" />
+
+                <EditText
+                    android:id="@+id/login_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="43dp"
+                    android:background="@color/cgray2"
+                    android:hint="비밀번호"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:paddingLeft="10dp"
+                    android:textColorHint="@color/cgray8"
+                    android:textSize="16sp" />
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/btn_login"

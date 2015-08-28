@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -76,11 +77,9 @@ public class MyPageFragment extends Fragment {
         rootView = inflater.inflate(R.layout.l_fragment_mypage, container, false);
         rootView.setTag(TAG);
 
-
         if (savedInstanceState != null) {
             mLayoutManagerType = (LayoutManagerType) savedInstanceState.getSerializable(KEY_LAYOUT_MANAGER);
         }
-
 
         return rootView;
     }
@@ -89,13 +88,10 @@ public class MyPageFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-
         ParseUser parseUser = ParseUser.getCurrentUser();
 
         AppPreference.saveName(mContext, parseUser.getUsername());
         AppPreference.saveMail(mContext, parseUser.getEmail());
-
-
 
         // 사용자 정보 출력
         ((TextView) rootView.findViewById(R.id.user_name)).setText(parseUser.getUsername());
@@ -105,7 +101,7 @@ public class MyPageFragment extends Fragment {
         getBookmarkInfo(parseUser.getEmail(), rootView);
 
         // 클릭 이벤트
-        Button btn_setting = (Button) rootView.findViewById(R.id.btn_setting);
+        ImageView btn_setting = (ImageView) rootView.findViewById(R.id.btn_setting);
         btn_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,17 +109,13 @@ public class MyPageFragment extends Fragment {
                 startActivityForResult(new Intent(mContext, SettingActivity.class), 100);
             }
         });
-
     }
-
-
 
     private void getBookmarkInfo(String email, final View rootView) {
         // 즐겨찾기 리스트
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
-
 
         pubList = new ArrayList<>();
 
@@ -135,10 +127,8 @@ public class MyPageFragment extends Fragment {
                 if (e == null) {
                     //for 문으로 하나하나 가져오기
                     for (ParseObject object : list) {
-
                         ParseQuery<ParseObject> query = ParseQuery.getQuery("PubInfo");
                         query.whereEqualTo("objectId", object.getString("pubId"));
-
                         try {
                             for (ParseObject pubInfo : query.find()) {
                                 PubInfo pub = new PubInfo();
@@ -172,14 +162,11 @@ public class MyPageFragment extends Fragment {
                 if (totalCnt < 3)
                     rootView.findViewById(R.id.layout_all).setVisibility(View.GONE);
 
-
                 mAdapter = new BookmarkAdapter(pubList);
                 mRecyclerView.setAdapter(mAdapter);
-
             }
 
         });
-
 
         rootView.findViewById(R.id.layout_all).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -7,12 +7,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.teamnexters.ehhhh.R;
 import com.teamnexters.ehhhh.activity.PubDetailActivity;
-import com.teamnexters.ehhhh.activity.PubSubMapActivity;
 import com.teamnexters.ehhhh.common.PubInfo;
 
 import java.util.ArrayList;
@@ -44,7 +42,7 @@ public class PubAdapter extends RecyclerView.Adapter<PubAdapter.ViewHolder> {
         public TextView textPubName;
         public TextView textAddress;
         public TextView textPhone;
-       // public ImageView mMapBtn;
+        // public ImageView mMapBtn;
 
         public ViewHolder(View itemView) {
             super(itemView);
