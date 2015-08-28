@@ -1,15 +1,10 @@
 package com.teamnexters.ehhhh.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.teamnexters.ehhhh.R;
 import com.teamnexters.ehhhh.common.PubInfo;
@@ -44,18 +39,5 @@ public class SplashActivity extends Activity {
                 finish();
             }
         }, 2970);
-        isNetworkCheck();
-    }
-
-    private void isNetworkCheck() {
-        ConnectivityManager manager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo mobile = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-        NetworkInfo wifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-
-        if (wifi.isConnected() || mobile.isConnected()) {
-
-        } else {
-            Toast.makeText(this, "네트워크가 연결되지 않았습니다. 연결 상태를 확인해주세요.", Toast.LENGTH_LONG).show();
-        }
     }
 }

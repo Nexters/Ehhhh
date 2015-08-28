@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.teamnexters.ehhhh.R;
 import com.teamnexters.ehhhh.activity.PubActivity;
 import com.teamnexters.ehhhh.common.PubInfo;
-import com.teamnexters.ehhhh.fragment.LocationFragment;
 
 import java.util.ArrayList;
 
@@ -71,11 +70,38 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         try {
             //holder.imageView.setBackground(mContext.getResources().getDrawable(itemsData.get(position).getImageUrl()));
             int imgUrl = R.drawable.back_gangnam;
-            if(position % 3 == 1) imgUrl = R.drawable.back_mapo;
-            else if(position % 3 == 2) imgUrl = R.drawable.back_youngsan;
+
+            String district = itemsData.get(position).getDistrict();
+
+            if (district.equals("동대문구")) {
+                imgUrl = R.drawable.back_ddm;
+            } else if (district.equals("강남구")) {
+                imgUrl = R.drawable.back_gangnam;
+            } else if (district.equals("구로구")) {
+                imgUrl = R.drawable.back_guro;
+            } else if (district.equals("관악구")) {
+                imgUrl = R.drawable.back_gwanak;
+            } else if (district.equals("종로구")) {
+                imgUrl = R.drawable.back_jongro;
+            } else if (district.equals("노원구")) {
+                imgUrl = R.drawable.back_nowon;
+            } else if (district.equals("마포구")) {
+                imgUrl = R.drawable.back_mapo;
+            } else if (district.equals("서대문구")) {
+                imgUrl = R.drawable.back_sdm;
+            } else if (district.equals("서초구")) {
+                imgUrl = R.drawable.back_sucho;
+            } else if (district.equals("성동구")) {
+                imgUrl = R.drawable.back_sungdong;
+            } else if (district.equals("영등포구")) {
+                imgUrl = R.drawable.back_youndeungpo;
+            } else if (district.equals("용산구")) {
+                imgUrl = R.drawable.back_youngsan;
+            }
+
             holder.imageView.setBackground(mContext.getResources().getDrawable(imgUrl));
-            holder.textView.setText(itemsData.get(position).getDistrict());
-            holder.pubCount.setText(itemsData.get(position).getCount()+"");
+            holder.textView.setText(district);
+            holder.pubCount.setText(itemsData.get(position).getCount() + "");
         } catch (Exception e) {
             e.printStackTrace();
         }

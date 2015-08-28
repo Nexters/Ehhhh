@@ -9,8 +9,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,6 +30,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.teamnexters.ehhhh.R;
 import com.teamnexters.ehhhh.adapter.PubAdapter;
+import com.teamnexters.ehhhh.common.GNetworkInfo;
 import com.teamnexters.ehhhh.common.PubInfo;
 
 import java.io.IOException;
@@ -52,6 +56,7 @@ public class PubActivity extends AppCompatActivity {
     protected RecyclerView mRecyclerView;
     protected RecyclerView.LayoutManager mLayoutManager;
     protected PubAdapter mAdapter;
+    private View progressBar;
 
     private GoogleMap mMap;
     private Marker mSelectedMarker;
@@ -64,10 +69,10 @@ public class PubActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.l_activity_pub);
-        Log.e("TEST", "PubActivity");
+
         final String location = getIntent().getExtras().getString(ARG_PARAM);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toobar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(location);
         toolbar.setTitleTextColor(getResources().getColor(R.color.cwhite));
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back_white));
@@ -79,72 +84,82 @@ public class PubActivity extends AppCompatActivity {
         mLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
 
         final TextView pubCountTextView = (TextView) findViewById(R.id.activity_pub_count);  //hy.jung
+        progressBar = findViewById(R.id.progressBar);
 
         if (savedInstanceState != null) {
             mLayoutManagerType = (LayoutManagerType) savedInstanceState.getSerializable(KEY_LAYOUT_MANAGER);
         }
 
-        // Edit by 슬기 2015-08-25 : 서버데이터 로드 추가
-        pubList = new ArrayList<>();
+        if (GNetworkInfo.IsWifiAvailable(this)) {
+            // Edit by 슬기 2015-08-25 : 서버데이터 로드 추가
+            pubList = new ArrayList<>();
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("PubInfo");
-        query.whereEqualTo("district", location);
-        query.orderByAscending("name");
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> list, ParseException e) {
-                if (e == null) {
-                    for (ParseObject object : list) {
-                        PubInfo pub = new PubInfo();
-                        pub.setObjectId(object.getObjectId());
-                        pub.setName(object.getString("name"));
-                        pub.setNameEng(object.getString("nameEng"));
-                        pub.setPhone(object.getString("phone"));
-                        pub.setDistrict(object.getString("district"));  //구,구분
-                        pub.setAdress(object.getString("adress"));
-                        pub.setTime(object.getString("time"));          //영업시간
-                        pub.setInfo1(object.getString("info1"));
-                        pub.setInfo2(object.getString("info2"));
-                        pub.setEtc(object.getString("etc"));
-                        // bookmark check
-                        ParseUser parseUser = ParseUser.getCurrentUser();
-                        String email = null;
-                        if (parseUser != null) {
-                            email = parseUser.getEmail();
-                            ParseQuery<ParseObject> bookmarkQuery = ParseQuery.getQuery("Bookmark");
-                            bookmarkQuery.whereEqualTo("email", email);
-                            try {
-                                for (ParseObject bookmark : bookmarkQuery.find()) {
-                                    if (bookmark.get("pubId").equals(object.getObjectId())) {
-                                        pub.setBookmarkYN(true);
-                                        break;
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("PubInfo");
+            query.whereEqualTo("district", location);
+            query.orderByAscending("name");
+            query.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> list, ParseException e) {
+                    if (e == null) {
+                        for (ParseObject object : list) {
+                            PubInfo pub = new PubInfo();
+                            pub.setObjectId(object.getObjectId());
+                            pub.setName(object.getString("name"));
+                            pub.setNameEng(object.getString("nameEng"));
+                            pub.setPhone(object.getString("phone"));
+                            pub.setDistrict(object.getString("district"));  //구,구분
+                            pub.setAdress(object.getString("adress"));
+                            pub.setTime(object.getString("time"));          //영업시간
+                            pub.setInfo1(object.getString("info1"));
+                            pub.setInfo2(object.getString("info2"));
+                            pub.setEtc(object.getString("etc"));
+                            // bookmark check
+                            ParseUser parseUser = ParseUser.getCurrentUser();
+                            String email = null;
+                            if (parseUser != null) {
+                                email = parseUser.getEmail();
+                                ParseQuery<ParseObject> bookmarkQuery = ParseQuery.getQuery("Bookmark");
+                                bookmarkQuery.whereEqualTo("email", email);
+                                try {
+                                    for (ParseObject bookmark : bookmarkQuery.find()) {
+                                        if (bookmark.get("pubId").equals(object.getObjectId())) {
+                                            pub.setBookmarkYN(true);
+                                            break;
+                                        }
                                     }
+                                } catch (ParseException e1) {
+                                    e1.printStackTrace();
+                                    Log.d("chasksk", "ParseQuery Error: " + e1.getMessage());
                                 }
-                            } catch (ParseException e1) {
-                                e1.printStackTrace();
-                                Log.d("chasksk", "ParseQuery Error: " + e1.getMessage());
                             }
+                            pubList.add(pub);
                         }
-                        pubList.add(pub);
+                    } else {
+                        Log.d("chasksk", "ParseQuery Error: " + e.getMessage());
                     }
-                } else {
-                    Log.d("chasksk", "ParseQuery Error: " + e.getMessage());
+
+                    setRecyclerViewLayoutManager(mLayoutManagerType);
+
+                    mAdapter = new PubAdapter(pubList);
+                    mRecyclerView.setAdapter(mAdapter);
+                    mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+                    setAddress();
+                    setPubName();
+                    // maps
+                    setUpMapIfNeeded();
+
+                    pubCountTextView.setText(String.valueOf(mAdapter.getItemCount()) + "건");    //hy.jung
+
+                    progressBar.setVisibility(View.GONE);
                 }
-
-                setRecyclerViewLayoutManager(mLayoutManagerType);
-
-                mAdapter = new PubAdapter(pubList);
-                mRecyclerView.setAdapter(mAdapter);
-                mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
-                setAddress();
-                setPubName();
-                // maps
-                setUpMapIfNeeded();
-
-                pubCountTextView.setText(String.valueOf(mAdapter.getItemCount()) + "건");    //hy.jung
-            }
-        });
+            });
+        } else {
+            Toast toast = Toast.makeText(this, "네트워크 연결을 확인해 주세요.", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            progressBar.setVisibility(View.GONE);
+        }
     }
 
     private void setAddress() {
@@ -237,18 +252,12 @@ public class PubActivity extends AppCompatActivity {
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {
-                if (mAdapter.getItemCount() > 1)
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 150));  //hy.jung
+                mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 150));  //hy.jung
                 mMap.setOnCameraChangeListener(null);
             }
         });
+        //        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 10));
         Marker tmp_marker = mMap.addMarker(markerOpt.position(loc).title(pubName));
-
-        if (mAdapter.getItemCount() < 2) {
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 15));
-            tmp_marker.showInfoWindow();
-            tmp_marker.setTitle(pubName);
-        }
         //tmp_marker.showInfoWindow();
         mHashMap.put(tmp_marker, pos);
     }

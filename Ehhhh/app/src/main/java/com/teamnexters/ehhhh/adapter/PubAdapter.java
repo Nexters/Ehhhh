@@ -106,5 +106,4 @@ public class PubAdapter extends RecyclerView.Adapter<PubAdapter.ViewHolder> {
     public int getItemCount() {
         return mDataSet.size();
     }
-
 }

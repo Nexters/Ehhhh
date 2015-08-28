@@ -103,7 +103,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/bookmarkbutton"
+                        android:id="@+id/mapbutton"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
@@ -113,13 +113,13 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="36dp"
-                            android:src="@drawable/ic_bookmark_org" />
+                            android:src="@drawable/ic_map" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="즐겨찾기"
+                            android:text="지도"
                             android:textColor="@color/floating"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -179,9 +179,9 @@
                         android:orientation="vertical">
 
                         <LinearLayout
+                            android:id="@+id/pub_info_addr"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical">
+                            android:layout_height="wrap_content">
 
                             <ImageView
                                 android:layout_width="wrap_content"
@@ -191,7 +191,7 @@
                                 android:src="@drawable/ic_pin_org" />
 
                             <TextView
-                                android:id="@+id/pub_info_addr"
+                                android:id="@+id/pub_info_addr_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
@@ -201,10 +201,10 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/pub_info_time"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:gravity="center_vertical">
+                            android:layout_marginTop="20dp">
 
                             <ImageView
                                 android:layout_width="wrap_content"
@@ -213,7 +213,7 @@
                                 android:src="@drawable/ic_time_org" />
 
                             <TextView
-                                android:id="@+id/pub_info_time"
+                                android:id="@+id/pub_info_time_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="PM 05:00 ~ AM 02:00"
@@ -222,10 +222,10 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/pub_info_etc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:gravity="center_vertical">
+                            android:layout_marginTop="20dp">
 
                             <ImageView
                                 android:layout_width="wrap_content"
@@ -234,7 +234,7 @@
                                 android:src="@drawable/ic_info_org" />
 
                             <TextView
-                                android:id="@+id/pub_info_etc"
+                                android:id="@+id/pub_info_etc_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="월요일 휴무"
@@ -242,6 +242,7 @@
                                 android:textSize="14sp" />
                         </LinearLayout>
                     </LinearLayout>
+
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
@@ -265,8 +266,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="100dp"
                 android:layout_marginRight="20dp"
-                android:src="@drawable/ic_inactive"
-                fab:fab_colorNormal="@color/floating"
+                android:src="@drawable/ic_bookmark_org"
+                fab:fab_colorNormal="@color/cwhite"
                 fab:fab_colorRipple="@color/floating_p" />
 
         </LinearLayout>

@@ -4,29 +4,204 @@
     android:background="@color/cwhite"
     android:orientation="vertical">
 
-    <TextView
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/cgray4"
-        android:text="여기에 제보하기 페이지에 대한 설명을 적어주면 좋을듯"
-        android:textSize="20sp" />
+        android:layout_height="wrap_content"
+        android:background="@color/cyellow"
+        android:elevation="3dp" />
 
-    <EditText
-        android:id="@+id/edit_report"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="15dp"
-        android:layout_weight="1"
-        android:background="@color/cgray3"
-        android:gravity="top"
-        android:hint="펍에대한정보를 입력해야하는데\n 뭔가 폼을 나눠야할듯"
-        android:inputType="text"
-        android:padding="10dp" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/cgray2">
+
+        <ImageView
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/icon_name_p" />
+
+        <EditText
+            android:id="@+id/report_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="43dp"
+            android:background="@color/cgray2"
+            android:hint="펍 이름"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:nextFocusDown="@+id/report_eng_name"
+            android:paddingLeft="10dp"
+            android:textColor="@color/cblack"
+            android:textColorHint="@color/cgray8"
+            android:textSize="16sp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/cgray2">
+
+        <ImageView
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/icon_name_p" />
+
+        <EditText
+            android:id="@+id/report_eng_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="43dp"
+            android:background="@color/cgray2"
+            android:hint="펍 영어이름"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:nextFocusDown="@+id/report_location"
+            android:paddingLeft="10dp"
+            android:textColor="@color/cblack"
+            android:textColorHint="@color/cgray8"
+            android:textSize="16sp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/cgray2">
+
+        <ImageView
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/icon_place_p" />
+
+        <EditText
+            android:id="@+id/report_location"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="43dp"
+            android:background="@color/cgray2"
+            android:hint="펍 주소"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:nextFocusDown="@+id/report_call"
+            android:paddingLeft="10dp"
+            android:textColor="@color/cblack"
+            android:textColorHint="@color/cgray8"
+            android:textSize="16sp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/cgray2">
+
+        <ImageView
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/icon_call" />
+
+        <EditText
+            android:id="@+id/report_call"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="43dp"
+            android:background="@color/cgray2"
+            android:hint="펍 전화번호"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:nextFocusDown="@+id/report_time"
+            android:paddingLeft="10dp"
+            android:textColor="@color/cblack"
+            android:textColorHint="@color/cgray8"
+            android:textSize="16sp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/cgray2">
+
+        <ImageView
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/icon_time" />
+
+        <EditText
+            android:id="@+id/report_time"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="43dp"
+            android:background="@color/cgray2"
+            android:hint="영업 시간"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:nextFocusDown="@+id/report_info"
+            android:paddingLeft="10dp"
+            android:textColor="@color/cblack"
+            android:textColorHint="@color/cgray8"
+            android:textSize="16sp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/cgray2">
+
+        <ImageView
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/icon_info" />
+
+        <EditText
+            android:id="@+id/report_info"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="43dp"
+            android:background="@color/cgray2"
+            android:hint="펍 정보"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:paddingLeft="10dp"
+            android:textColor="@color/cblack"
+            android:textColorHint="@color/cgray8"
+            android:textSize="16sp" />
+    </FrameLayout>
+
 
     <TextView
         android:id="@+id/btn_report"
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:layout_margin="26dp"
         android:background="@color/cyellow"
         android:gravity="center"
         android:text="제보하기"

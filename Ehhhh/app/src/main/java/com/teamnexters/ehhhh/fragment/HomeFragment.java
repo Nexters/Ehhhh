@@ -5,9 +5,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -16,7 +18,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.teamnexters.ehhhh.R;
 import com.teamnexters.ehhhh.adapter.HomeAdapter;
-import com.teamnexters.ehhhh.common.PubInfo;
+import com.teamnexters.ehhhh.common.GNetworkInfo;
 import com.teamnexters.ehhhh.common.Recommend;
 
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ public class HomeFragment extends Fragment {
     protected RecyclerView mRecyclerView;
     protected RecyclerView.LayoutManager mLayoutManager;
     protected HomeAdapter mAdapter;
+    private View progressBar;
 
     ArrayList<Recommend> recommendList;//슬기 2015-08-25
 
@@ -51,8 +54,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,90 +65,90 @@ public class HomeFragment extends Fragment {
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
+        progressBar = rootView.findViewById(R.id.progressBar);
 
         if (savedInstanceState != null) {
             mLayoutManagerType = (LayoutManagerType) savedInstanceState.getSerializable(KEY_LAYOUT_MANAGER);
         }
 
 
+        if (GNetworkInfo.IsWifiAvailable(getActivity())) {
+            // Edit by 슬기 2015-08-25 : 서버데이터 로드 추가
+            recommendList = new ArrayList<>();
+            final Recommend[] recommend = {null};
 
-        // Edit by 슬기 2015-08-25 : 서버데이터 로드 추가
-        recommendList = new ArrayList<>();
-        final Recommend[] recommend = {null};
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Recommend");
+            query.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> list, ParseException e) {
+                    if (e == null) {
 
-//        ParseUser parseUser = ParseUser.getCurrentUser();
-//        String email = null;
-//        if(parseUser != null)
-//            email = parseUser.getEmail();
+                        for (ParseObject object : list) {
+                            String pubId = object.getString("pubId");
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Recommend");
-        query.findInBackground(new FindCallback<ParseObject>() {
-           @Override
-           public void done(List<ParseObject> list, ParseException e) {
-               if (e == null) {
+                            recommend[0] = new Recommend();
+                            recommend[0].setObjectId(object.getObjectId());
+                            recommend[0].setSubject(object.getString("subject"));
+                            recommend[0].setPubId(pubId);
+                            ParseQuery<ParseObject> subQuery = ParseQuery.getQuery("PubInfo");
+                            subQuery.whereEqualTo("objectId", pubId);
+                            try {
+                                for (ParseObject subObject : subQuery.find()) {
+                                    recommend[0].pub.setObjectId(subObject.getString("name"));
+                                    recommend[0].pub.setName(subObject.getString("name"));
+                                    recommend[0].pub.setNameEng(subObject.getString("nameEng"));
+                                    recommend[0].pub.setPhone(subObject.getString("phone"));
+                                    recommend[0].pub.setDistrict(subObject.getString("district"));  //구,구분
+                                    recommend[0].pub.setAdress(subObject.getString("adress"));
+                                    recommend[0].pub.setTime(subObject.getString("time"));          //영업시간
+                                    recommend[0].pub.setInfo1(subObject.getString("info1"));
+                                    recommend[0].pub.setInfo2(subObject.getString("info2"));
+                                    recommend[0].pub.setEtc(subObject.getString("etc"));
 
-                   for (ParseObject object : list) {
-                       String pubId = object.getString("pubId");
+                                    // bookmark check
+                                    ParseUser parseUser = ParseUser.getCurrentUser();
+                                    String email = null;
+                                    if (parseUser != null) {
+                                        email = parseUser.getEmail();
+                                        ParseQuery<ParseObject> bookmarkQuery = ParseQuery.getQuery("Bookmark");
+                                        bookmarkQuery.whereEqualTo("email", email);
+                                        try {
+                                            for (ParseObject bookmark : bookmarkQuery.find()) {
+                                                if (bookmark.get("pubId").equals(pubId)) {
+                                                    recommend[0].pub.setBookmarkYN(true);
+                                                    break;
+                                                }
+                                            }
+                                        } catch (ParseException e1) {
+                                            //e1.printStackTrace();
+                                            Log.d("chasksk", "ParseQuery Error: " + e1.getMessage());
+                                        }
+                                    }
+                                }
+                                recommendList.add(recommend[0]);
+                            } catch (ParseException e1) {
+                                //e1.printStackTrace();
+                                Log.d("chasksk", "ParseQuery Error: " + e1.getMessage());
+                            }
+                        }
+                    } else {
+                        Log.d("chasksk", "ParseQuery Error: " + e.getMessage());
+                    }
+                    setRecyclerViewLayoutManager(mLayoutManagerType);
 
-                       recommend[0] = new Recommend();
-                       recommend[0].setObjectId(object.getObjectId());
-                       recommend[0].setSubject(object.getString("subject"));
-                       recommend[0].setPubId(pubId);
-                       ParseQuery<ParseObject> subQuery = ParseQuery.getQuery("PubInfo");
-                       subQuery.whereEqualTo("objectId", pubId);
-                       try {
-                           for (ParseObject subObject : subQuery.find()) {
-                               recommend[0].pub.setObjectId(subObject.getString("name"));
-                               recommend[0].pub.setName(subObject.getString("name"));
-                               recommend[0].pub.setNameEng(subObject.getString("nameEng"));
-                               recommend[0].pub.setPhone(subObject.getString("phone"));
-                               recommend[0].pub.setDistrict(subObject.getString("district"));  //구,구분
-                               recommend[0].pub.setAdress(subObject.getString("adress"));
-                               recommend[0].pub.setTime(subObject.getString("time"));          //영업시간
-                               recommend[0].pub.setInfo1(subObject.getString("info1"));
-                               recommend[0].pub.setInfo2(subObject.getString("info2"));
-                               recommend[0].pub.setEtc(subObject.getString("etc"));
+                    mAdapter = new HomeAdapter(recommendList);
+                    mRecyclerView.setAdapter(mAdapter);
 
-                               // bookmark check
-                               ParseUser parseUser = ParseUser.getCurrentUser();
-                               String email = null;
-                               if(parseUser != null) {
-                                   email = parseUser.getEmail();
-                                   ParseQuery<ParseObject> bookmarkQuery = ParseQuery.getQuery("Bookmark");
-                                   bookmarkQuery.whereEqualTo("email", email);
-                                   try {
-                                       for(ParseObject bookmark : bookmarkQuery.find()) {
-                                           if(bookmark.get("pubId").equals(pubId)) {
-                                               recommend[0].pub.setBookmarkYN(true);
-                                               break;
-                                           }
-                                       }
-                                   } catch (ParseException e1) {
-                                       //e1.printStackTrace();
-                                       Log.d("chasksk", "ParseQuery Error: " + e1.getMessage());
-                                   }
-                               }
-                           }
+                    progressBar.setVisibility(View.GONE);
+                }
+            });
 
-                           recommendList.add(recommend[0]);
-                       } catch (ParseException e1) {
-                           //e1.printStackTrace();
-                           Log.d("chasksk", "ParseQuery Error: " + e1.getMessage());
-                       }
-                   }
-
-               } else {
-                   Log.d("chasksk", "ParseQuery Error: " + e.getMessage());
-               }
-               setRecyclerViewLayoutManager(mLayoutManagerType);
-
-               mAdapter = new HomeAdapter(recommendList);
-               mRecyclerView.setAdapter(mAdapter);
-           }
-       });
-
-
-
+        } else {
+            Toast toast = Toast.makeText(getActivity(), "네트워크 연결을 확인해 주세요.", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            progressBar.setVisibility(View.GONE);
+        }
 
         return rootView;
     }

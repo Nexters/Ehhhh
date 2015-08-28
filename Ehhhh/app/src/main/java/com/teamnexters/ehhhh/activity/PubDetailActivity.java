@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.melnykov.fab.FloatingActionButton;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -21,6 +24,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.teamnexters.ehhhh.R;
+import com.teamnexters.ehhhh.fragment.PageFragment;
 
 import java.util.List;
 
@@ -46,26 +50,33 @@ public class PubDetailActivity extends AppCompatActivity {
         String etc = getIntent().getExtras().getString("etc");
         boolean bookmark = getIntent().getExtras().getBoolean("bookmark");
 
-
         ((TextView) findViewById(R.id.pub_title)).setText(name);
         ((TextView) findViewById(R.id.pub_title_eng)).setText(nameEng);
-        ((TextView) findViewById(R.id.pub_info_addr)).setText(adress);
-        ((TextView) findViewById(R.id.pub_info_time)).setText(time);
 
         if (info1 == null || info1.equals(""))
-            (findViewById(R.id.pub_summary)).setVisibility(View.GONE);
+            (findViewById(R.id.pub_summary)).setVisibility(View.INVISIBLE);
         else
             ((TextView) findViewById(R.id.pub_summary)).setText(info1);
 
         if (info2 == null || info2.equals(""))
-            (findViewById(R.id.pub_subject)).setVisibility(View.GONE);
+            ((TextView) findViewById(R.id.pub_subject)).setText(name + "(" + nameEng + ") 입니다.");
         else
             ((TextView) findViewById(R.id.pub_subject)).setText(info2);
+
+        if (adress == null || adress.equals(""))
+            (findViewById(R.id.pub_info_addr)).setVisibility(View.GONE);
+        else
+            ((TextView) findViewById(R.id.pub_info_addr_text)).setText(adress);
+
+        if (time == null || time.equals(""))
+            (findViewById(R.id.pub_info_time)).setVisibility(View.GONE);
+        else
+            ((TextView) findViewById(R.id.pub_info_time_text)).setText(time);
 
         if (etc == null || etc.equals(""))
             (findViewById(R.id.pub_info_etc)).setVisibility(View.GONE);
         else
-            ((TextView) findViewById(R.id.pub_info_etc)).setText(etc);
+            ((TextView) findViewById(R.id.pub_info_etc_text)).setText(etc);
 
 
         ActionBar actionBar = getSupportActionBar();
@@ -74,26 +85,13 @@ public class PubDetailActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
 
         // button
+        if(bookmark) {
+            ((FloatingActionButton)findViewById(R.id.floatingbutton)).setImageResource(R.drawable.ic_bookmark_select);
+        } else {
+            ((FloatingActionButton)findViewById(R.id.floatingbutton)).setImageResource(R.drawable.ic_bookmark_org);
+        }
+        findViewById(R.id.floatingbutton).setTag(bookmark);
         findViewById(R.id.floatingbutton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mapIntent = new Intent(getApplicationContext(), PubSubMapActivity.class);
-                mapIntent.putExtra("pub_address", adress);
-                mapIntent.putExtra("pub_name", name);
-                startActivity(mapIntent);
-            }
-        });
-
-        findViewById(R.id.callbutton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
-                startActivity(intent);
-            }
-        });
-
-        findViewById(R.id.bookmarkbutton).setTag(bookmark);
-        findViewById(R.id.bookmarkbutton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean bookmarkYN = v.getTag().equals(true);
@@ -102,7 +100,7 @@ public class PubDetailActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "로그인 후 사용하실 수 있습니다.", Toast.LENGTH_SHORT).show();
 
 //                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//                    MyPageFragment fragment = new MyPageFragment();
+//                    PageFragment fragment = new PageFragment();
 //                    transaction.replace(R.id.content_fragment, fragment);
 //                    transaction.commit();
                 } else {
@@ -124,7 +122,7 @@ public class PubDetailActivity extends AppCompatActivity {
                                         public void done(ParseException e) {
                                             if (e == null) {
                                                 Toast.makeText(getApplicationContext(), "즐겨찾기 해제되었습니다.", Toast.LENGTH_SHORT).show();
-                                                ;
+                                                ((FloatingActionButton)findViewById(R.id.floatingbutton)).setImageResource(R.drawable.ic_bookmark_org);
                                             }
                                         }
                                     });
@@ -133,6 +131,7 @@ public class PubDetailActivity extends AppCompatActivity {
                         });
                     } else {
                         Toast.makeText(getApplicationContext(), "즐겨찾기에 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                        ((FloatingActionButton)findViewById(R.id.floatingbutton)).setImageResource(R.drawable.ic_bookmark_select);
                         ParseObject object = new ParseObject("Bookmark");
                         object.put("email", email);
                         object.put("pubId", pubId);
@@ -142,6 +141,25 @@ public class PubDetailActivity extends AppCompatActivity {
                 }
             }
         });
+
+        findViewById(R.id.callbutton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.mapbutton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mapIntent = new Intent(getApplicationContext(), PubSubMapActivity.class);
+                mapIntent.putExtra("pub_address", adress);
+                mapIntent.putExtra("pub_name", name);
+                startActivity(mapIntent);
+            }
+        });
+
 
         findViewById(R.id.sharebutton).setOnClickListener(new View.OnClickListener() {
             @Override

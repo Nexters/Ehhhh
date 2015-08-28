@@ -6,9 +6,11 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -16,8 +18,8 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.teamnexters.ehhhh.R;
 import com.teamnexters.ehhhh.adapter.LocationAdapter;
+import com.teamnexters.ehhhh.common.GNetworkInfo;
 import com.teamnexters.ehhhh.common.PubInfo;
-import com.teamnexters.ehhhh.common.Recommend;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,7 @@ public class LocationFragment extends Fragment {
     protected RecyclerView mRecyclerView;
     protected RecyclerView.LayoutManager mLayoutManager;
     protected LocationAdapter mAdapter;
+    private View progressBar;
 
     ArrayList<PubInfo> pubList;
 
@@ -59,54 +62,59 @@ public class LocationFragment extends Fragment {
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
+        progressBar = rootView.findViewById(R.id.progressBar);
 
         if (savedInstanceState != null) {
             mLayoutManagerType = (LayoutManagerType) savedInstanceState.getSerializable(KEY_LAYOUT_MANAGER);
         }
 
-        // Edit by 슬기 2015-08-25 : 서버데이터 로드 추가
-        pubList = new ArrayList<>();
+        if (GNetworkInfo.IsWifiAvailable(getActivity())) {
+            // Edit by 슬기 2015-08-25 : 서버데이터 로드 추가
+            pubList = new ArrayList<>();
 
-        final PubInfo[] comparePub = {null};
+            final PubInfo[] comparePub = {null};
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("PubInfo");
-        query.orderByAscending("district");
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> list, ParseException e) {
-                if (e == null) {
-                    for (ParseObject object : list) {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("PubInfo");
+            query.orderByAscending("district");
+            query.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> list, ParseException e) {
+                    if (e == null) {
+                        for (ParseObject object : list) {
 
-                        if (comparePub[0] == null) {
-                            comparePub[0] = new PubInfo();
-                            comparePub[0].setDistrict(object.getString("district"));  //구,구분
-                            comparePub[0].setCount(1);
-                        } else if (comparePub[0].getDistrict().equals(object.getString("district"))) {
-                            int count = comparePub[0].getCount();
-                            comparePub[0].setCount(count + 1);
-                        } else {
-                            pubList.add(comparePub[0]);
-                            comparePub[0] = new PubInfo();
-                            comparePub[0].setDistrict(object.getString("district"));  //구,구분
-                            comparePub[0].setCount(1);
+                            if (comparePub[0] == null) {
+                                comparePub[0] = new PubInfo();
+                                comparePub[0].setDistrict(object.getString("district"));  //구,구분
+                                comparePub[0].setCount(1);
+                            } else if (comparePub[0].getDistrict().equals(object.getString("district"))) {
+                                int count = comparePub[0].getCount();
+                                comparePub[0].setCount(count + 1);
+                            } else {
+                                pubList.add(comparePub[0]);
+                                comparePub[0] = new PubInfo();
+                                comparePub[0].setDistrict(object.getString("district"));  //구,구분
+                                comparePub[0].setCount(1);
+                            }
                         }
+                        pubList.add(comparePub[0]);
+                    } else {
+                        Log.d("chasksk", "ParseQuery Error: " + e.getMessage());
                     }
-                    pubList.add(comparePub[0]);
-                } else {
-                    Log.d("chasksk", "ParseQuery Error: " + e.getMessage());
+
+                    setRecyclerViewLayoutManager(mLayoutManagerType);
+
+                    mAdapter = new LocationAdapter(pubList);
+                    mRecyclerView.setAdapter(mAdapter);
+                    mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                    progressBar.setVisibility(View.GONE);
                 }
-
-                setRecyclerViewLayoutManager(mLayoutManagerType);
-
-                mAdapter = new LocationAdapter(pubList);
-                mRecyclerView.setAdapter(mAdapter);
-                mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
-            }
-        });
-
-
-
+            });
+        } else {
+            Toast toast = Toast.makeText(getActivity(), "네트워크 연결을 확인해 주세요.", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            progressBar.setVisibility(View.GONE);
+        }
 
         return rootView;
     }
@@ -128,7 +136,6 @@ public class LocationFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.scrollToPosition(scrollPosition);
     }
-
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {

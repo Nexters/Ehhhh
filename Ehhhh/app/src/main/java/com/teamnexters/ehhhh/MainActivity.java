@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     // edit by 슬기 2015-08-26 : 마이페이지 화면 갱신하기 위해 파라미터 추가
-                    //startActivity(new Intent(mContext, SearchActivity.class));
                     startActivityForResult(new Intent(mContext, SearchActivity.class), 100);
                 }
             });

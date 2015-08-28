@@ -72,6 +72,7 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bookmark, parent, false);
         mContext = parent.getContext();
 
@@ -95,11 +96,11 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
     @Override
     public int getItemCount() {
         int totalCnt = mDataSet.size();
-        if(totalCnt < 3) {
+        if (totalCnt < 3) {
             return mDataSet.size();
         }
 
-        if(isAllview) {
+        if (isAllview) {
             return mDataSet.size();
         } else {
             return 2;

@@ -8,4 +8,7 @@
     <string name="hello_world">Hello world!</string>
 
     <string name="close_app">뒤로 버튼을 한 번 더 누르면 앱이 종료됩니다.</string>
+
+    <string name="mypage_text2">서울 전역에 있는 다양하고 맛있는\n<b>크래프트 비어 펍</b>과 <b>보틀샵</b>을 찾아 추가해보세요!</string>
+
 </resources>

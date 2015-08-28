@@ -8,12 +8,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -23,6 +24,7 @@ import com.parse.ParseUser;
 import com.teamnexters.ehhhh.R;
 import com.teamnexters.ehhhh.activity.SettingActivity;
 import com.teamnexters.ehhhh.adapter.BookmarkAdapter;
+import com.teamnexters.ehhhh.common.GNetworkInfo;
 import com.teamnexters.ehhhh.common.PubInfo;
 import com.teamnexters.ehhhh.util.AppPreference;
 
@@ -36,14 +38,17 @@ import java.util.List;
 public class MyPageFragment extends Fragment {
 
     private static final String TAG = "MyPageFragement";
-    Context mContext;
+    private Context mContext;
 
-    LayoutManagerType mLayoutManagerType;
-    RecyclerView mRecyclerView;
-    RecyclerView.LayoutManager mLayoutManager;
-    BookmarkAdapter mAdapter;
+    private LayoutManagerType mLayoutManagerType;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private BookmarkAdapter mAdapter;
 
-    ArrayList<PubInfo> pubList;
+    private View rootView;
+    private View progressBar;
+
+    private ArrayList<PubInfo> pubList;
 
     private static final String KEY_LAYOUT_MANAGER = "layoutmanager";
 
@@ -56,7 +61,7 @@ public class MyPageFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 100) {
+        if (requestCode == 100) {
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
             PageFragment fragment = new PageFragment();
             transaction.replace(R.id.content_fragment, fragment);
@@ -70,12 +75,15 @@ public class MyPageFragment extends Fragment {
         mContext = getActivity();
     }
 
-    View rootView;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.l_fragment_mypage, container, false);
         rootView.setTag(TAG);
+
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
+        progressBar = rootView.findViewById(R.id.progressBar);
 
         if (savedInstanceState != null) {
             mLayoutManagerType = (LayoutManagerType) savedInstanceState.getSerializable(KEY_LAYOUT_MANAGER);
@@ -89,7 +97,6 @@ public class MyPageFragment extends Fragment {
         super.onResume();
 
         ParseUser parseUser = ParseUser.getCurrentUser();
-
         AppPreference.saveName(mContext, parseUser.getUsername());
         AppPreference.saveMail(mContext, parseUser.getEmail());
 
@@ -97,8 +104,16 @@ public class MyPageFragment extends Fragment {
         ((TextView) rootView.findViewById(R.id.user_name)).setText(parseUser.getUsername());
         ((TextView) rootView.findViewById(R.id.user_mail)).setText(parseUser.getEmail());
 
-        // Edit by 슬기 2015-08-25 : 서버데이터 로드 추가
-        getBookmarkInfo(parseUser.getEmail(), rootView);
+
+        if (GNetworkInfo.IsWifiAvailable(getActivity())) {
+            // Edit by 슬기 2015-08-25 : 서버데이터 로드 추가
+            getBookmarkInfo(parseUser.getEmail(), rootView);
+        } else {
+            Toast toast = Toast.makeText(getActivity(), "네트워크 연결을 확인해 주세요.", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            progressBar.setVisibility(View.GONE);
+        }
 
         // 클릭 이벤트
         ImageView btn_setting = (ImageView) rootView.findViewById(R.id.btn_setting);
@@ -113,10 +128,6 @@ public class MyPageFragment extends Fragment {
 
     private void getBookmarkInfo(String email, final View rootView) {
         // 즐겨찾기 리스트
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
-
         pubList = new ArrayList<>();
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Bookmark");
@@ -127,8 +138,10 @@ public class MyPageFragment extends Fragment {
                 if (e == null) {
                     //for 문으로 하나하나 가져오기
                     for (ParseObject object : list) {
+
                         ParseQuery<ParseObject> query = ParseQuery.getQuery("PubInfo");
                         query.whereEqualTo("objectId", object.getString("pubId"));
+
                         try {
                             for (ParseObject pubInfo : query.find()) {
                                 PubInfo pub = new PubInfo();
@@ -158,22 +171,30 @@ public class MyPageFragment extends Fragment {
                 setRecyclerViewLayoutManager(mLayoutManagerType);
 
                 int totalCnt = pubList.size();
+                rootView.findViewById(R.id.defaultView).setVisibility(View.GONE);
                 ((TextView) rootView.findViewById(R.id.bookmark_cnt)).setText(totalCnt + "");
-                if (totalCnt < 3)
+                if (totalCnt == 0) {
+                    rootView.findViewById(R.id.defaultView).setVisibility(View.VISIBLE);
+                }
+                if (totalCnt < 3) {
                     rootView.findViewById(R.id.layout_all).setVisibility(View.GONE);
+                } else {
+                    rootView.findViewById(R.id.layout_all).setVisibility(View.VISIBLE);
+                }
 
                 mAdapter = new BookmarkAdapter(pubList);
                 mRecyclerView.setAdapter(mAdapter);
+                progressBar.setVisibility(View.GONE);
             }
 
         });
+
 
         rootView.findViewById(R.id.layout_all).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 즐겨찾기 한 펍 모두 보기
                 v.setVisibility(View.GONE);
-
                 mAdapter.setViewType(true);
                 mRecyclerView.refreshDrawableState();
             }
@@ -181,7 +202,6 @@ public class MyPageFragment extends Fragment {
 
         rootView.invalidate();
     }
-
 
     public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
         int scrollPosition = 0;

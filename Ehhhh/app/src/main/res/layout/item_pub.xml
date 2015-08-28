@@ -1,59 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:background="@color/cwhite"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/dividerHorizontal" />
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="1dp"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:paddingLeft="16dp">
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/cwhite"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/item_pub_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="title"
+                    android:textColor="@color/cblack"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:typeface="sans" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/item_pub_name"
-                android:layout_width="wrap_content"
+                android:id="@+id/item_address"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="title"
-                android:textColor="@color/cblack"
-                android:textSize="20sp"
-                android:textStyle="bold"
+                android:textColor="#505050"
+                android:textSize="12sp"
+                android:typeface="sans" />
+
+            <TextView
+                android:id="@+id/item_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="title"
+                android:textColor="#505050"
+                android:textSize="12sp"
                 android:typeface="sans" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/item_address"
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="title"
-            android:textColor="#505050"
-            android:textSize="12sp"
-            android:typeface="sans" />
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/btn_pub_arrow" />
 
-        <TextView
-            android:id="@+id/item_phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="title"
-            android:textColor="#505050"
-            android:textSize="12sp"
-            android:typeface="sans" />
     </LinearLayout>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginRight="16dp"
-        android:src="@drawable/btn_pub_arrow" />
-
 </LinearLayout>

@@ -28,7 +28,7 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.l_activity_setting);
         mContext = this;
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toobar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("설정");
         toolbar.setTitleTextColor(getResources().getColor(R.color.cwhite));
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back_white));

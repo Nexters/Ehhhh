@@ -34,8 +34,8 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="26dp"
                 android:layout_marginTop="50dp"
                 android:background="@color/cgray2">
 
@@ -65,8 +65,8 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="26dp"
                 android:layout_marginTop="5dp"
                 android:background="@color/cgray2">
 
@@ -95,8 +95,8 @@
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="26dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/cyellow"
                 android:gravity="center_horizontal"

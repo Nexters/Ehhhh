@@ -104,7 +104,7 @@ public class PubInfo {
     }
 
     public boolean getBookmarkYN() {
-        if(bookmarkYN)
+        if (bookmarkYN)
             return bookmarkYN;
         else
             return false;

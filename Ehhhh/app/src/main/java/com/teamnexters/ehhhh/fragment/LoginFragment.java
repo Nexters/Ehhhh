@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.teamnexters.ehhhh.R;
+import com.teamnexters.ehhhh.common.GNetworkInfo;
 
 /**
  * Created by 현식 on 2015-08-20.
@@ -23,8 +25,9 @@ import com.teamnexters.ehhhh.R;
 public class LoginFragment extends Fragment {
 
     private static final String TAG = "LoginFragement";
-    Context mContext;
-    EditText edit_name, edit_password;
+    private Context mContext;
+    private EditText edit_name, edit_password;
+    private View progressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,7 @@ public class LoginFragment extends Fragment {
         TextView btn_signup = (TextView) rootView.findViewById(R.id.btn_signup);
         edit_name = (EditText) rootView.findViewById(R.id.login_name);
         edit_password = (EditText) rootView.findViewById(R.id.login_pass);
+        progressBar = rootView.findViewById(R.id.progressBar);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +56,13 @@ public class LoginFragment extends Fragment {
                 }
 
                 if (!edit_name.getText().toString().equals("") && !edit_password.getText().toString().equals("")) {
-                    doLogin();
+                    if (GNetworkInfo.IsWifiAvailable(getActivity())) {
+                        doLogin();
+                    } else {
+                        Toast toast = Toast.makeText(getActivity(), "네트워크 연결을 확인해 주세요.", Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                    }
                 }
             }
         });
@@ -60,9 +70,6 @@ public class LoginFragment extends Fragment {
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                PageFragment pageFragment = new PageFragment();
-//                pageFragment.changeSignup();
-//
                 // edit by 슬기 2015-08-20
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 SignupFragment fragment = new SignupFragment();
@@ -76,9 +83,13 @@ public class LoginFragment extends Fragment {
 
 
     private void doLogin() {
+        progressBar.setVisibility(View.VISIBLE);
+
         ParseUser.logInInBackground(edit_name.getText().toString(), edit_password.getText().toString(), new LogInCallback() {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
+                progressBar.setVisibility(View.GONE);
+
                 if (parseUser != null) {
                     //슬기
                     Toast.makeText(mContext, "Welcome!!", Toast.LENGTH_SHORT).show();
