@@ -252,11 +252,11 @@ public class PubActivity extends AppCompatActivity {
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {
-                mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 150));  //hy.jung
+                mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100));  //hy.jung
                 mMap.setOnCameraChangeListener(null);
             }
         });
-        //        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 10));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 10));
         Marker tmp_marker = mMap.addMarker(markerOpt.position(loc).title(pubName));
         //tmp_marker.showInfoWindow();
         mHashMap.put(tmp_marker, pos);
