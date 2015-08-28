@@ -180,7 +180,7 @@ public class PubDetailActivity extends AppCompatActivity {
                 msg.addCategory(Intent.CATEGORY_DEFAULT);
                 msg.putExtra(Intent.EXTRA_SUBJECT, "[" + appName + "]" + " 오늘은 \"" + name + "\"로 ~!!"); // 앱 이름
                 //msg.putExtra(Intent.EXTRA_TITLE, "[펍 이름]"); // 펍 이름
-                msg.putExtra(Intent.EXTRA_TEXT, "연락처 : " + phone + "\n주소 : " + adress + "\nhttp://www.naver.com"); // 펍 정보(연락처, 주소, 링크)
+                msg.putExtra(Intent.EXTRA_TEXT, "연락처 : " + phone + "\n주소 : " + adress); // 펍 정보(연락처, 주소, 링크)
                 msg.setType("text/plain");
 
                 startActivity(Intent.createChooser(msg, "공유"));
